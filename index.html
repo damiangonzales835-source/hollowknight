@@ -3,258 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Archivo técnico, artístico, personajes y biomas de Hollow Knight y Team Cherry.">
+    <title>HALLOWNEST // ARCHIVE — Hollow Knight Tech, Lore & Biomes</title>
 
-    <title>Ecos del Vacìo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Conexión con CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <canvas id="soul-particles" aria-hidden="true"></canvas>
 
-    <!-- =========================
-         ENCABEZADO
-    ========================== -->
-    <header>
+    <!-- Barra de Navegación Glassmorphism -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="brand">
+                <span class="brand-sigil">◈</span>
+                <div class="brand-text">
+                    <span class="brand-title">HALLOWNEST</span>
+                    <span class="brand-sub">SYS.ARCHIVE // v1.5.78</span>
+                </div>
+            </a>
 
-        <div class="logo">
-            Hollow Shop
+            <nav class="nav-links" id="nav-links">
+                <a href="#historia" class="nav-item"><span class="nav-num">01</span> Historia & Personajes</a>
+                <a href="#arte" class="nav-item"><span class="nav-num">02</span> Biomas & Arte</a>
+                <a href="#tecnica" class="nav-item"><span class="nav-num">03</span> Arquitectura Técnica</a>
+                <a href="#industria" class="nav-item"><span class="nav-num">04</span> Equipo & Industria</a>
+            </nav>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
-
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="#servicios">Servicios</a>
-            <a href="#galeria">Galería</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
-
     </header>
 
+    <main>
+        <!-- HERO SECTION -->
+        <section id="hero" class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-content reveal visible">
+                    <div class="status-badge">
+                        <span class="pulse-dot"></span>
+                        <span>ESTADO: REINO EN ESTASIS // ADELAIDE, AU</span>
+                    </div>
+                    <h1 class="hero-title">HOLLOW KNIGHT</h1>
+                    <p class="hero-subtitle">Deconstrucción técnica, narrativa visual, lore de personajes, cartografía completa de biomas y legado indie de <strong>Team Cherry</strong>.</p>
 
-    <!-- =========================
-         SECCIÓN PRINCIPAL
-    ========================== -->
-    <section id="inicio" class="hero">
+                    <div class="hero-actions">
+                        <a href="#historia" class="btn btn-primary">Personajes & Lore</a>
+                        <a href="#arte" class="btn btn-ghost">Explorar Biomas</a>
+                    </div>
+                </div>
 
-        <div class="hero-text">
-
-            <h1>Bienvenido a Hollow Shop</h1>
-
-            <p>
-                Acá encontraras todo lo relacionado sobre el juego Hollow knight
-            </p>
-
-            <button onclick="mostrarMensaje()">
-                Conocer más
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         NOSOTROS
-    ========================== -->
-    <section id="nosotros" class="section">
-
-        <h2>Acerca de nosotros</h2>
-
-        <p class="texto-centro">
-            Somos una tienda exclusiva sobre todo lo relacionado al juego Hollow Knife, acá encontraras mucha variedad de artículos, novedades sobre el juego, guías y una galeria donde puedan subir sus fan arts.
-        </p>
-
-    </section>
-
-
-    <!-- =========================
-         SERVICIOS
-    ========================== -->
-    <section id="servicios" class="section fondo">
-
-        <h2>Servicios</h2>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>Servicio 01</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
-
-                <button onclick="mostrarServicio('Servicio 01')">
-                    Ver más
-                </button>
+                <div class="hero-telemetry glass-panel reveal visible">
+                    <div class="panel-header">
+                        <span class="mono-label">ENTITY_SPEC // THE_KNIGHT</span>
+                        <span class="mono-tag">METROIDVANIA</span>
+                    </div>
+                    <div class="telemetry-stats">
+                        <div class="stat-box">
+                            <span class="stat-value">90<small>/100</small></span>
+                            <span class="stat-label">Metacritic Score</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">13+</span>
+                            <span class="stat-label">Zonas & Biomas Clave</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">24<small>FPS</small></span>
+                            <span class="stat-label">Animación Tradicional</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Desarrolladores Core</span>
+                        </div>
+                    </div>
+                    <div class="panel-footer mono-label">
+                        <span>ENGINE: UNITY 2D</span>
+                        <span>RELEASE: FEB 24, 2017</span>
+                    </div>
+                </div>
             </div>
+        </section>
 
+        <!-- SECCIÓN 01: HISTORIA & LORE DE PERSONAJES RELEVANTES -->
+        <section id="historia" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">01 // HISTORIA & PERSONAJES</span>
+                    <h2 class="section-title">El Reino Caído y sus Figuras Clave</h2>
+                    <p class="section-desc">Hallownest nació de la voluntad del Rey Pálido y cayó ante el resurgimiento de El Resplandor. Cada personaje encarna un fragmento de esta tragedia.</p>
+                </div>
 
-            <div class="card">
-                <h3>Servicio 02</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
+                <!-- Lore de Personajes Relevantes -->
+                <div class="lore-grid" id="characters-grid">
+                    <article class="glass-card reveal">
+                        <div class="card-meta">PERSONAJE // VASIJA errante</div>
+                        <h3>El Caballero (The Knight)</h3>
+                        <p>Una pequeña vasija nacida en las profundidades del Abismo, forjada con Vacío y coraza pálida. Regresa a Hallownest atraído por el llamado del reino para enfrentar la Infección y decidir el destino de su contenedor principal.</p>
+                    </article>
 
-                <button onclick="mostrarServicio('Servicio 02')">
-                    Ver más
-                </button>
+                    <article class="glass-card reveal">
+                        <div class="card-meta">PERSONAJE // CENTINELA DEL REINO</div>
+                        <h3>Hornet</h3>
+                        <p>Princesa protectora nacida de Herrah (una de las Tres Soñadoras) y el Rey Pálido. Ágil, letal con su aguijón e hilo, pone a prueba al Caballero para asegurar que sea capaz de contener la amenaza sin repetir el fracaso anterior.</p>
+                    </article>
+
+                    <article class="glass-card reveal">
+                        <div class="card-meta">PERSONAJE // EL CONTENEDOR</div>
+                        <h3>El Hollow Knight</h3>
+                        <p>Elegido entre incontables vasijas por su aparente pureza, fue entrenado y encerrado en el Templo del Huevo Negro para sellar la Infección. Sin embargo, el vínculo afectivo con el Rey Pálido abrió una grieta por donde se filtró la plaga.</p>
+                    </article>
+
+                    <article class="glass-card reveal">
+                        <div class="card-meta">DEIDAD // MONARCA DE HALLOWNEST</div>
+                        <h3>El Rey Pálido</h3>
+                        <p>Antiguo Wyrm que adoptó una forma diminuta y otorgó pensamiento y conciencia a los insectos del reino. Impulsó la era dorada y el uso del Alma, pero recurrió a medidas extremas en el Abismo para intentar salvar su civilización.</p>
+                    </article>
+
+                    <article class="glass-card reveal">
+                        <div class="card-meta">DEIDAD // LA LUZ OLVIDADA</div>
+                        <h3>El Resplandor (The Radiance)</h3>
+                        <p>Deidad antigua asociada a la luz y a la tribu de las polillas, relegada al olvido cuando el Rey Pálido unificó el reino. Sobrevive en el plano onírico y corrompe las mentes a través de los sueños como una infección anaranjada.</p>
+                    </article>
+
+                    <article class="glass-card reveal">
+                        <div class="card-meta">VIAJERO // ERUDITO DE MONOMON</div>
+                        <h3>Quirrel</h3>
+                        <p>Explorador sereno y curioso que recorre Hallownest sin recordar su pasado completo. Porta la máscara de la Soñadora Monomon, cumpliendo un propósito silencioso ligado al Archivo de la Teacher y al final de su propio viaje.</p>
+                    </article>
+
+                    <article class="glass-card reveal">
+                        <div class="card-meta">CARTOGRAFÍA & EXPLORACIÓN</div>
+                        <h3>Cornifer & Zote</h3>
+                        <p><strong>Cornifer</strong> cartografía a mano cada rincón peligroso tarareando su melodía mientras su esposa Iselda vende mapas en Bocasucia. <strong>Zote el Todopoderoso</strong> representa la arrogancia cómica y fanfarrona frente a la crudeza del reino.</p>
+                    </article>
+
+                    <article class="glass-card reveal">
+                        <div class="card-meta">LOS TRES SOÑADORES</div>
+                        <h3>Monomon, Lurien y Herrah</h3>
+                        <p>Tres figuras clave que aceptaron sumirse en un sueño profundo como sellos vivos del Huevo Negro: Monomon (la Maestra), Lurien (el Vigía de la Ciudad) y Herrah (reina de Nido Profundo y madre de Hornet).</p>
+                    </article>
+                </div>
+
+                <!-- Cronología de Expansiones -->
+                <div class="dlc-timeline glass-panel reveal">
+                    <h3 class="timeline-title">Cronología de Expansiones Gratuitas (Content Packs)</h3>
+                    <div class="timeline-track">
+                        <div class="timeline-item">
+                            <span class="t-date">AGO 2017</span>
+                            <h4>Hidden Dreams</h4>
+                            <p>Jefes oníricos adicionales y el Portal Onírico para desplazarse entre puntos clave del mapa.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="t-date">OCT 2017</span>
+                            <h4>The Grimm Troupe</h4>
+                            <p>Compañía itinerante de temática pesadilla, ritual de la Llama y combate contra el Rey Pesadilla Grimm.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="t-date">ABR 2018</span>
+                            <h4>Lifeblood</h4>
+                            <p>Mejoras de rendimiento, ajustes de equilibrio, nuevo jefe y el misterio de la Savia Vital azul.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="t-date">AGO 2018</span>
+                            <h4>Godmaster</h4>
+                            <p>El Hogar de los Dioses, los Panteones de combate y los desenlaces ligados a Ascender con el Vacío.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
+        <!-- SECCIÓN 02: TODOS LOS BIOMAS DEL REINO & CONCEPT ART -->
+        <section id="arte" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">02 // BIOMAS DE HALLOWNEST & ARTE</span>
+                    <h2 class="section-title">Cartografía, Ambientación y Concept Art</h2>
+                    <p class="section-desc">Todos los biomas del reino con su ambientación, qué puedes encontrar en ellos y notas de dirección artística. Haz clic en cualquiera para inspeccionar su ficha.</p>
+                </div>
 
-            <div class="card">
-                <h3>Servicio 03</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
+                <!-- Filtros Dinámicos -->
+                <div class="filter-bar reveal" role="tablist" aria-label="Filtros de Biomas y Arte">
+                    <button class="filter-btn active" data-filter="all">Todos los Biomas & Archivos</button>
+                    <button class="filter-btn" data-filter="superficie-verde">Superficie y Bosques</button>
+                    <button class="filter-btn" data-filter="ruinas-agua">Ruinas, Agua y Sueños</button>
+                    <button class="filter-btn" data-filter="subterraneo-abismo">Subterráneo, Cristal y Abismo</button>
+                    <button class="filter-btn" data-filter="concept">Pipeline & Concept Art</button>
+                </div>
 
-                <button onclick="mostrarServicio('Servicio 03')">
-                    Ver más
-                </button>
+                <!-- Galería Filtrable -->
+                <div class="art-grid" id="art-grid"></div>
             </div>
+        </section>
 
-        </div>
+        <!-- SECCIÓN 03: ARQUITECTURA TÉCNICA DETRÁS DEL JUEGO -->
+        <section id="tecnica" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">03 // INGENIERÍA & PIPELINE</span>
+                    <h2 class="section-title">La Parte Técnica Detrás de la Creación</h2>
+                    <p class="section-desc">Cómo Team Cherry logró un control preciso, atmósfera envolvente y fluidez en Unity 2D.</p>
+                </div>
 
-    </section>
+                <div class="tech-dashboard">
+                    <div class="tech-card glass-panel reveal">
+                        <div class="tech-icon">⚙</div>
+                        <span class="mono-label">MOTOR & ARQUITECTURA</span>
+                        <h3>Unity Engine + C# + PlayMaker</h3>
+                        <p>Construido en Unity combinando scripts en C# con <strong>PlayMaker</strong> para máquinas de estados visuales, facilitando iterar patrones de IA, estados de jefes y mecánicas de combate con rapidez.</p>
+                        <ul class="tech-specs">
+                            <li><span>Game Feel:</span> Respuesta inmediata, buffer de salto/ataque y retroceso controlado.</li>
+                            <li><span>Hitboxes:</span> Cajas precisas para priorizar justicia en el combate.</li>
+                        </ul>
+                    </div>
 
+                    <div class="tech-card glass-panel reveal">
+                        <div class="tech-icon">◈</div>
+                        <span class="mono-label">ILUSIÓN DE PROFUNDIDAD</span>
+                        <h3>Parallax Multi-Capa 2.5D</h3>
+                        <p>Los escenarios se disponen en múltiples planos de profundidad dentro del espacio de Unity, combinando arte dibujado a mano con desenfoque de cámara, iluminación radial y partículas.</p>
+                        <ul class="tech-specs">
+                            <li><span>Capas:</span> Primer plano, plano jugable y fondos escalonados.</li>
+                            <li><span>Atmósfera:</span> Lluvia, esporas, ceniza o niebla según el bioma.</li>
+                        </ul>
+                    </div>
 
-    <!-- =========================
-         GALERÍA
-    ========================== -->
-    <section id="galeria" class="section">
-
-        <h2>Galería</h2>
-
-        <div class="galeria">
-
-            <img
-                src="https://picsum.photos/400/300?random=1"
-                alt="Imagen 1"
-                onclick="ampliarImagen(this)"
-            >
-
-            <img
-                src="https://picsum.photos/400/300?random=2"
-                alt="Imagen 2"
-                onclick="ampliarImagen(this)"
-            >
-
-            <img
-                src="https://picsum.photos/400/300?random=3"
-                alt="Imagen 3"
-                onclick="ampliarImagen(this)"
-            >
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         CALCULADORA
-    ========================== -->
-    <section class="section fondo">
-
-        <h2>Calculadora</h2>
-
-        <div class="calculadora">
-
-            <input
-                type="number"
-                id="numero1"
-                placeholder="Número 1"
-            >
-
-            <input
-                type="number"
-                id="numero2"
-                placeholder="Número 2"
-            >
-
-            <div class="botones-calculadora">
-
-                <button onclick="sumar()">
-                    +
-                </button>
-
-                <button onclick="restar()">
-                    -
-                </button>
-
-                <button onclick="multiplicar()">
-                    ×
-                </button>
-
-                <button onclick="dividir()">
-                    ÷
-                </button>
-
+                    <div class="tech-card glass-panel reveal">
+                        <div class="tech-icon">♫</div>
+                        <span class="mono-label">DISEÑO SONORO ADAPTATIVO</span>
+                        <h3>Christopher Larkin & Audio Dinámico</h3>
+                        <p>Partitura melancólica y acústica que acompaña la soledad y la épica de Hallownest, integrada con efectos de sonido nítidos para el aguijón, pasos, agua y enemigos.</p>
+                        <ul class="tech-specs">
+                            <li><span>Identidad:</span> Motivos musicales únicos por zona y jefe.</li>
+                            <li><span>Inmersión:</span> Silencios y ecos que refuerzan la escala subterránea.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <h3 id="resultado">
-                Resultado: 0
-            </h3>
+        <!-- SECCIÓN 04: EQUIPO CREADOR & IMPACTO EN LA INDUSTRIA -->
+        <section id="industria" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">04 // TEAM CHERRY & INDUSTRIA</span>
+                    <h2 class="section-title">Creadores y Legado en la Industria</h2>
+                    <p class="section-desc">Surgido de una game jam y financiado en Kickstarter, se consolidó como un referente moderno del metroidvania independiente.</p>
+                </div>
 
+                <div class="team-grid reveal">
+                    <div class="member-card glass-card">
+                        <div class="member-role">CO-DIRECTOR // ARTE & ANIMACIÓN</div>
+                        <h3>Ari Gibson</h3>
+                        <p>Dirección artística, ilustración tradicional, diseño de personajes y biomas, y co-creación del universo narrativo de Hallownest.</p>
+                    </div>
+
+                    <div class="member-card glass-card">
+                        <div class="member-role">CO-DIRECTOR // DISEÑO & PROGRAMACIÓN</div>
+                        <h3>William Pellen</h3>
+                        <p>Diseño del mundo interconectado, mecánicas de movimiento y combate, programación y comportamiento de enemigos y jefes.</p>
+                    </div>
+
+                    <div class="member-card glass-card">
+                        <div class="member-role">COMPOSITOR // AUDIO & BANDA SONORA</div>
+                        <h3>Christopher Larkin</h3>
+                        <p>Composición de la banda sonora original y diseño de audio que define el tono emocional y táctil del juego.</p>
+                    </div>
+
+                    <div class="member-card glass-card">
+                        <div class="member-role">SOPORTE TÉCNICO & PORTING</div>
+                        <h3>David Kazi & Jack Vine</h3>
+                        <p>Aporte en programación técnica, optimización y adaptación del juego a distintas plataformas.</p>
+                    </div>
+                </div>
+
+                <div class="external-hub glass-panel reveal">
+                    <div class="hub-info">
+                        <span class="mono-label">EXTERNAL_NODES // VERIFICACIÓN & CRÍTICA</span>
+                        <h3>Portales Especializados y Recursos Oficiales</h3>
+                        <p>Consulta reseñas, el sitio oficial del estudio y bases de datos comunitarias.</p>
+                    </div>
+                    <div class="hub-links">
+                        <a href="https://www.metacritic.com/game/hollow-knight/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Metacritic</span>
+                            <span class="ext-desc">Puntuación y reseñas críticas ↗</span>
+                        </a>
+                        <a href="https://www.teamcherry.com.au/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Team Cherry Oficial</span>
+                            <span class="ext-desc">Sitio del estudio desarrollador ↗</span>
+                        </a>
+                        <a href="https://hollowknight.wiki/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Hollow Knight Wiki</span>
+                            <span class="ext-desc">Lore, biomas, personajes y jefes ↗</span>
+                        </a>
+                        <a href="https://store.steampowered.com/app/367520/Hollow_Knight/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Steam Store</span>
+                            <span class="ext-desc">Ficha oficial y reseñas de usuarios ↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-left">
+                <span class="brand-title">HALLOWNEST // ARCHIVE</span>
+                <p>Archivo fan de carácter informativo. Hollow Knight es marca y obra de Team Cherry.</p>
+            </div>
+            <div class="footer-right mono-label">
+                <span>RENDER: VANILLA JS / CSS3</span>
+                <span>NO COST TOO GREAT</span>
+            </div>
         </div>
-
-    </section>
-
-
-    <!-- =========================
-         CONTACTO
-    ========================== -->
-    <section id="contacto" class="section">
-
-        <h2>Contacto</h2>
-
-        <form onsubmit="enviarFormulario(event)">
-
-            <input
-                type="text"
-                id="nombre"
-                placeholder="Nombre"
-                required
-            >
-
-            <input
-                type="email"
-                id="correo"
-                placeholder="Correo electrónico"
-                required
-            >
-
-            <textarea
-                id="mensaje"
-                placeholder="Escribe tu mensaje"
-                required
-            ></textarea>
-
-            <button type="submit">
-                Enviar
-            </button>
-
-        </form>
-
-    </section>
-
-
-    <!-- =========================
-         PIE DE PÁGINA
-    ========================== -->
-    <footer>
-
-        <p>
-            © 2026 Lorem Ipsum - Plantilla educativa
-        </p>
-
-        <p>
-            Página creada con HTML, CSS y JavaScript
-        </p>
-
     </footer>
 
+    <!-- Modal de Inspección -->
+    <div class="modal-backdrop" id="art-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-window glass-panel">
+            <button class="modal-close" id="modal-close" aria-label="Cerrar ventana">✕</button>
+            <div class="modal-visual" id="modal-visual"></div>
+            <div class="modal-body">
+                <div class="modal-meta">
+                    <span class="mono-tag" id="modal-category">CATEGORÍA</span>
+                    <span class="mono-label" id="modal-palette">PALETA HEX</span>
+                </div>
+                <h3 id="modal-title">Título</h3>
+                <p id="modal-desc">Descripción...</p>
+                <div class="modal-tech-note">
+                    <span class="mono-label">QUÉ ENCONTRAR Y DIRECCIÓN VISUAL:</span>
+                    <p id="modal-note">Nota...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Conexión con JavaScript -->
     <script src="script.js"></script>
-
 </body>
 </html>
