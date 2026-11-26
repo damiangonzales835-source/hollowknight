@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HALLOWNEST // ARCHIVE — Enciclopedia visual interactiva, lore, biomas, jefes, amuletos, habilidades, mapa, música, Silksong y arquitectura técnica de Hollow Knight.">
+    <title>HALLOWNEST // ARCHIVE — Hollow Knight Tech, Lore & Biomes</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="soul-particles" aria-hidden="true"></canvas>
+
+    <!-- Barra de Navegación Glassmorphism Organizada + Buscador General -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="brand">
+                <span class="brand-sigil">◈</span>
+                <div class="brand-text">
+                    <span class="brand-title">HALLOWNEST</span>
+                    <span class="brand-sub">SYS.ARCHIVE // v2.0</span>
+                </div>
+            </a>
+
+            <nav class="nav-links" id="nav-links" aria-label="Navegación principal">
+                <div class="nav-dropdown">
+                    <a href="#historia" class="nav-item"><span class="nav-num">01</span> Mundo ▾</a>
+                    <div class="dropdown-menu glass-panel">
+                        <a href="#historia" class="dropdown-link">01 · Historia y Personajes</a>
+                        <a href="#expansiones" class="dropdown-link">02 · Expansiones Gratuitas</a>
+                        <a href="#arte" class="dropdown-link">03 · Biomas y Concept Art</a>
+                        <a href="#mapa" class="dropdown-link">06 · Cartografía de Hallownest</a>
+                    </div>
+                </div>
+
+                <div class="nav-dropdown">
+                    <a href="#jefes" class="nav-item"><span class="nav-num">02</span> Archivo ▾</a>
+                    <div class="dropdown-menu glass-panel">
+                        <a href="#jefes" class="dropdown-link">04 · Jefes y Enemigos</a>
+                        <a href="#arsenal" class="dropdown-link">05 · Amuletos, Habilidades y Objetos</a>
+                    </div>
+                </div>
+
+                <a href="#musica" class="nav-item"><span class="nav-num">03</span> Música</a>
+                <a href="#silksong" class="nav-item"><span class="nav-num">04</span> Silksong</a>
+
+                <div class="nav-dropdown">
+                    <a href="#tecnica" class="nav-item"><span class="nav-num">05</span> Estudio ▾</a>
+                    <div class="dropdown-menu glass-panel">
+                        <a href="#tecnica" class="dropdown-link">09 · Arquitectura Técnica</a>
+                        <a href="#industria" class="dropdown-link">10 · Equipo e Industria</a>
+                    </div>
+                </div>
+
+                <!-- Buscador General -->
+                <div class="nav-search-wrap">
+                    <input type="search" id="global-search" class="nav-search-input" placeholder="Buscar personajes, jefes, amuletos..." aria-label="Buscar en el archivo de Hallownest" autocomplete="off">
+                    <div class="search-results glass-panel" id="search-results" hidden></div>
+                </div>
+            </nav>
+
+            <button class="hamburger" id="hamburger" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION (CONSERVADO + MEJORADO) -->
+        <section id="hero" class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-content reveal visible">
+                    <div class="status-badge">
+                        <span class="pulse-dot"></span>
+                        <span>ESTADO: REINO EN ESTASIS // ADELAIDE, AU</span>
+                    </div>
+                    <h1 class="hero-title">HOLLOW KNIGHT</h1>
+                    <p class="hero-subtitle">Deconstrucción técnica, narrativa visual, lore de personajes, cartografía completa de biomas, bestiario, amuletos, música y legado indie de <strong>Team Cherry</strong>.</p>
+
+                    <div class="hero-actions">
+                        <a href="#historia" class="btn btn-primary">Personajes & Lore</a>
+                        <a href="#arte" class="btn btn-ghost">Explorar Biomas</a>
+                        <a href="#jefes" class="btn btn-ghost">Jefes & Amuletos</a>
+                    </div>
+                </div>
+
+                <div class="hero-telemetry glass-panel reveal visible">
+                    <div class="panel-header">
+                        <span class="mono-label">ENTITY_SPEC // THE_KNIGHT</span>
+                        <span class="mono-tag">METROIDVANIA</span>
+                    </div>
+                    <div class="telemetry-banner">
+                        <img src="assets/images/silksong/hk-header.jpg" alt="Arte oficial de Hollow Knight" class="telemetry-img zoomable-img" data-zoom-src="assets/images/silksong/hk-header.jpg" data-zoom-caption="Arte promocional oficial de Hollow Knight (Team Cherry)" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                    </div>
+                    <div class="telemetry-stats">
+                        <div class="stat-box">
+                            <span class="stat-value">90<small>/100</small></span>
+                            <span class="stat-label">Metacritic Score</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">45</span>
+                            <span class="stat-label">Amuletos Oficiales</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">4</span>
+                            <span class="stat-label">Content Packs Gratis</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Desarrolladores Core</span>
+                        </div>
+                    </div>
+                    <div class="panel-footer mono-label">
+                        <span>ENGINE: UNITY 2D</span>
+                        <span>RELEASE: FEB 24, 2017</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 01: HISTORIA & LORE DE PERSONAJES RELEVANTES (11 TARJETAS INDIVIDUALES CON IMÁGENES) -->
+        <section id="historia" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">01 // HISTORIA & PERSONAJES</span>
+                    <h2 class="section-title">El Reino Caído y sus Figuras Clave</h2>
+                    <p class="section-desc">Hallownest nació de la voluntad del Rey Pálido y cayó ante el resurgimiento de El Resplandor. Cada personaje —incluyendo Cornifer, Zote y cada uno de los Tres Soñadores por separado— encarna un fragmento de esta tragedia.</p>
+                </div>
+
+                <!-- Renderizado dinámico con imágenes reales desde script.js -->
+                <div class="lore-grid" id="characters-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 02: CRONOLOGÍA AMPLIADA DE LAS CUATRO EXPANSIONES GRATUITAS -->
+        <section id="expansiones" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">02 // CONTENT PACKS GRATUITOS</span>
+                    <h2 class="section-title">Cronología de Expansiones Gratuitas (Content Packs)</h2>
+                    <p class="section-desc">Team Cherry lanzó cuatro grandes actualizaciones de contenido completamente gratuitas para todos los jugadores de Hollow Knight, ampliando la historia, los jefes, la música y el desafío final.</p>
+                </div>
+
+                <div class="dlc-timeline glass-panel reveal">
+                    <div class="timeline-track">
+                        <a href="#dlc-hidden-dreams" class="timeline-item timeline-link">
+                            <span class="t-date">AGO 2017</span>
+                            <h4>Hidden Dreams</h4>
+                            <p>Príncipe Gris Zote, Defensor Blanco y el Portal Onírico.</p>
+                        </a>
+                        <a href="#dlc-grimm-troupe" class="timeline-item timeline-link">
+                            <span class="t-date">OCT 2017</span>
+                            <h4>The Grimm Troupe</h4>
+                            <p>Ritual de la Llama, Grimm, Rey Pesadilla Grimm y Sendero del Dolor.</p>
+                        </a>
+                        <a href="#dlc-lifeblood" class="timeline-item timeline-link">
+                            <span class="t-date">ABR 2018</span>
+                            <h4>Lifeblood</h4>
+                            <p>Caballero Colmena, rediseño del Señor Traidor, marcadores y optimización.</p>
+                        </a>
+                        <a href="#dlc-godmaster" class="timeline-item timeline-link">
+                            <span class="t-date">AGO 2018</span>
+                            <h4>Godmaster</h4>
+                            <p>Hogar de los Dioses, 5 Panteones, Vasija Pura y Resplandor Absoluto.</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="expansions-grid" id="expansions-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 03: BIOMAS DEL REINO & CONCEPT ART (CONSERVANDO FILTROS + IMÁGENES REALES) -->
+        <section id="arte" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">03 // BIOMAS DE HALLOWNEST & ARTE</span>
+                    <h2 class="section-title">Cartografía, Ambientación y Concept Art</h2>
+                    <p class="section-desc">Explora los 13 biomas clave de Hallownest y el proceso artístico 2D con capturas reales del juego. Haz clic en cualquier tarjeta para abrir su ficha completa con imagen ampliada.</p>
+                </div>
+
+                <!-- Filtros Dinámicos Originales -->
+                <div class="filter-bar reveal" role="tablist" aria-label="Filtros de Biomas y Arte">
+                    <button class="filter-btn active" data-filter="all">Todos los Biomas & Archivos</button>
+                    <button class="filter-btn" data-filter="superficie-verde">Superficie y Bosques</button>
+                    <button class="filter-btn" data-filter="ruinas-agua">Ruinas, Agua y Sueños</button>
+                    <button class="filter-btn" data-filter="subterraneo-abismo">Subterráneo, Cristal y Abismo</button>
+                    <button class="filter-btn" data-filter="concept">Pipeline & Concept Art</button>
+                </div>
+
+                <!-- Galería Filtrable -->
+                <div class="art-grid" id="art-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 04 (05 DEL PROMPT): JEFES Y ENEMIGOS -->
+        <section id="jefes" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">04 // BESTIARIO & COMBATE</span>
+                    <h2 class="section-title">Jefes y Enemigos de Hallownest</h2>
+                    <p class="section-desc">Recopilación organizada por categoría que distingue claramente entre jefes de historia, jefes opcionales, jefes oníricos, guerreros oníricos, desafíos de los Panteones y enemigos comunes o especiales.</p>
+                </div>
+
+                <div class="filter-bar reveal" role="tablist" aria-label="Filtros de Jefes y Enemigos">
+                    <button class="filter-btn boss-filter-btn active" data-cat="all">Todos</button>
+                    <button class="filter-btn boss-filter-btn" data-cat="principales">Jefes Principales</button>
+                    <button class="filter-btn boss-filter-btn" data-cat="opcionales">Jefes Opcionales</button>
+                    <button class="filter-btn boss-filter-btn" data-cat="oniricos">Jefes Oníricos</button>
+                    <button class="filter-btn boss-filter-btn" data-cat="guerreros">Guerreros Oníricos</button>
+                    <button class="filter-btn boss-filter-btn" data-cat="panteones">Jefes de Panteones</button>
+                    <button class="filter-btn boss-filter-btn" data-cat="enemigos">Enemigos Comunes y Especiales</button>
+                </div>
+
+                <div class="bosses-grid" id="bosses-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 05 (06 DEL PROMPT): AMULETOS, HABILIDADES, HECHIZOS Y OBJETOS -->
+        <section id="arsenal" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">05 // EQUIPAMIENTO & PROGRESIÓN</span>
+                    <h2 class="section-title">Amuletos, Habilidades, Hechizos y Objetos</h2>
+                    <p class="section-desc">Todos los 45 amuletos oficiales con su coste en muescas, las habilidades de movimiento, los hechizos de Alma y Vacío, las mejoras del Aguijón y las reliquias clave del reino.</p>
+                </div>
+
+                <div class="filter-bar reveal" role="tablist" aria-label="Categorías de Equipamiento">
+                    <button class="filter-btn arsenal-tab-btn active" data-tab="amuletos">Amuletos (45)</button>
+                    <button class="filter-btn arsenal-tab-btn" data-tab="habilidades">Habilidades y Artes</button>
+                    <button class="filter-btn arsenal-tab-btn" data-tab="hechizos">Hechizos y Aguijón</button>
+                    <button class="filter-btn arsenal-tab-btn" data-tab="objetos">Objetos Importantes</button>
+                </div>
+
+                <!-- Subfiltro exclusivo para Amuletos -->
+                <div class="charm-subfilter reveal" id="charm-subfilter">
+                    <input type="search" id="charm-local-search" class="subfilter-input" placeholder="Filtrar amuleto por nombre, efecto o ubicación...">
+                    <select id="charm-notch-filter" class="subfilter-select" aria-label="Filtrar por coste de muescas">
+                        <option value="all">Todas las muescas</option>
+                        <option value="0">0 muescas</option>
+                        <option value="1">1 muesca</option>
+                        <option value="2">2 muescas</option>
+                        <option value="3">3 muescas</option>
+                        <option value="4">4 muescas</option>
+                        <option value="5">5 muescas</option>
+                    </select>
+                </div>
+
+                <div class="arsenal-grid charms-layout" id="arsenal-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 06 (07 DEL PROMPT): CARTOGRAFÍA DE HALLOWNEST -->
+        <section id="mapa" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">06 // CARTOGRAFÍA GENERAL</span>
+                    <h2 class="section-title">Mapa e Interconexión de Hallownest</h2>
+                    <p class="section-desc">Explora la geografía interconectada del reino, sus Estaciones de Ciervocamino, las dos líneas de Tranvía y los ascensores que unen la superficie con El Abismo. Haz clic en el mapa para ampliarlo.</p>
+                </div>
+
+                <div class="map-showcase glass-panel reveal">
+                    <div class="map-image-wrap">
+                        <img src="https://static.wikia.nocookie.net/hollowknight/images/9/9c/Clean_map_updated.png/revision/latest" alt="Mapa general completo de Hallownest" loading="lazy" class="map-main-img zoomable-img" data-zoom-src="https://static.wikia.nocookie.net/hollowknight/images/9/9c/Clean_map_updated.png/revision/latest" data-zoom-caption="Mapa general completo de Hallownest (haz clic fuera o pulsa Escape para cerrar)" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                        <span class="map-zoom-badge">🔍 Clic en el mapa para ampliar</span>
+                    </div>
+
+                    <div class="map-interactive-panel">
+                        <span class="mono-label">EXPLORADOR REGIONAL // SELECCIONA UNA ZONA</span>
+                        <div class="map-region-buttons" id="map-region-buttons"></div>
+                        <div class="map-region-detail" id="map-region-detail"></div>
+                    </div>
+                </div>
+
+                <div class="transport-grid reveal">
+                    <article class="glass-card">
+                        <div class="card-meta">RED DE VIAJE RÁPIDO</div>
+                        <h3>Estaciones de Ciervocamino</h3>
+                        <p>El Último Ciervo conecta 10 estaciones principales (incluyendo Bocasucia, Cruces Olvidados, Sendero Verde, Estación de la Reina, Ciudad de Lágrimas, Estación del Rey, Tierras de Descanso, Pueblo Distante, Jardines de la Reina y la Estación Oculta).</p>
+                    </article>
+                    <article class="glass-card">
+                        <div class="card-meta">INGENIERÍA DEL REY PÁLIDO</div>
+                        <h3>Tranvías Superior e Inferior</h3>
+                        <p>Operan con el Pase de Tranvía encontrado en el Tranvía Fallido de Nido Profundo. La línea superior enlaza Cruces Olvidados con Tierras de Descanso; la inferior conecta Nido Profundo, Cuenca Antigua y Bordes del Reino.</p>
+                    </article>
+                    <article class="glass-card">
+                        <div class="card-meta">CONEXIONES VERTICALES</div>
+                        <h3>Ascensores y Portal Onírico</h3>
+                        <p>Dos ascensores monumentales unen Ciudad de Lágrimas con Cruces Olvidados y Tierras de Descanso. Además, el Portal Onírico (Hidden Dreams) permite teletransporte libre desde casi cualquier punto del mapa.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 07 (08 DEL PROMPT): BANDA SONORA Y AMBIENTACIÓN -->
+        <section id="musica" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">07 // BANDA SONORA & DISEÑO SONORO</span>
+                    <h2 class="section-title">La Música de Christopher Larkin</h2>
+                    <p class="section-desc">La partitura acústica y melancólica de Christopher Larkin es inseparable de la identidad de Hallownest: combina piano, cuerdas y silencios calculados para evocar soledad, misterio, calma y épica.</p>
+                </div>
+
+                <div class="composer-banner glass-panel reveal">
+                    <div class="composer-photo-wrap">
+                        <img src="assets/images/characters/christopher-larkin.jpg" alt="Retrato del compositor Christopher Larkin" loading="lazy" class="composer-photo zoomable-img" data-zoom-src="assets/images/characters/christopher-larkin.jpg" data-zoom-caption="Christopher Larkin — Compositor y diseñador de audio de Hollow Knight y Silksong" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                    </div>
+                    <div class="composer-info">
+                        <span class="mono-tag">COMPOSITOR & AUDIO DESIGNER // ADELAIDE, AU</span>
+                        <h3>Christopher Larkin</h3>
+                        <p>Compositor australiano responsable tanto de la banda sonora original de Hollow Knight y sus expansiones como del diseño de efectos ambientales y la próxima banda sonora de Silksong. Su uso de motivos recurrentes conecta lugares, personajes y recuerdos a lo largo de toda la aventura.</p>
+                        <div class="music-links">
+                            <a href="https://open.spotify.com/album/4XgG9TdJYRMG4FNfxr587c" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Escuchar en Spotify ↗</a>
+                            <a href="https://christopherlarkin.bandcamp.com/album/hollow-knight-original-soundtrack" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Bandcamp Oficial ↗</a>
+                            <a href="https://www.youtube.com/results?search_query=Christopher+Larkin+Hollow+Knight+Original+Soundtrack" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">YouTube Oficial ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ost-albums" id="ost-albums"></div>
+                <div class="sound-design-grid" id="sound-design-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 08 (09 DEL PROMPT): UNIVERSO DE HOLLOW KNIGHT Y SILKSONG -->
+        <section id="silksong" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">08 // LA FRANQUICIA & SU SECUELA</span>
+                    <h2 class="section-title">Universo de Hollow Knight y Silksong</h2>
+                    <p class="section-desc">Lo que comenzó como una meta de Kickstarter para añadir a Hornet como personaje jugable evolucionó en una secuela completa desarrollada por Team Cherry: <strong>Hollow Knight: Silksong</strong>.</p>
+                </div>
+
+                <!-- Comparativa clara Hollow Knight vs Silksong -->
+                <div class="vs-grid reveal">
+                    <article class="glass-panel vs-card">
+                        <div class="vs-media">
+                            <img src="assets/images/silksong/hk-screen-1.jpg" alt="Captura oficial de Hollow Knight" loading="lazy" class="vs-img zoomable-img" data-zoom-src="assets/images/silksong/hk-screen-1.jpg" data-zoom-caption="Hollow Knight — Hallownest" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                            <span class="mono-tag">HOLLOW KNIGHT (2017)</span>
+                        </div>
+                        <div class="vs-body">
+                            <h3>El Caballero en Hallownest</h3>
+                            <ul>
+                                <li><strong>Protagonista:</strong> El Caballero, vasija silenciosa de Vacío armada con un Aguijón.</li>
+                                <li><strong>Mundo:</strong> Hallownest, un reino subterráneo en descenso hacia El Abismo.</li>
+                                <li><strong>Recurso y curación:</strong> Alma (Soul), curación estática de 1 máscara con Foco y sistema de 45 Amuletos.</li>
+                                <li><strong>Ritmo de combate:</strong> Metódico, preciso y basado en posicionamiento clásico.</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="glass-panel vs-card vs-silksong">
+                        <div class="vs-media">
+                            <img src="assets/images/silksong/silksong-header.jpg" alt="Arte oficial de Hollow Knight: Silksong" loading="lazy" class="vs-img zoomable-img" data-zoom-src="assets/images/silksong/silksong-header.jpg" data-zoom-caption="Hollow Knight: Silksong — Hornet en Pharloom" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                            <span class="mono-tag vs-tag-orange">HOLLOW KNIGHT: SILKSONG</span>
+                        </div>
+                        <div class="vs-body">
+                            <h3>Hornet en Pharloom</h3>
+                            <ul>
+                                <li><strong>Protagonista:</strong> Hornet, princesa protectora de Hallownest, ahora con diálogos propios y aguja e hilo.</li>
+                                <li><strong>Mundo:</strong> Pharloom, un reino gobernado por seda y canción donde el viaje asciende hacia una ciudadela brillante.</li>
+                                <li><strong>Recurso y curación:</strong> Seda (Silk), curación rápida incluso en el aire (restaura varias máscaras a la vez) y creación de herramientas y trampas.</li>
+                                <li><strong>Ritmo de combate:</strong> Más acrobático, veloz, con escalada de salientes, misiones de tablón y más de 150 enemigos confirmados.</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Datos confirmados vs Teorías de la comunidad -->
+                <div class="silksong-facts-grid reveal">
+                    <article class="glass-card">
+                        <div class="card-meta">DATOS CONFIRMADOS POR TEAM CHERRY</div>
+                        <h3>Qué está oficialmente verificado</h3>
+                        <ul class="fact-list">
+                            <li>Anunciado oficialmente el 14 de febrero de 2019 como secuela completa independiente.</li>
+                            <li>Hornet es capturada y llevada a la tierra desconocida de Pharloom.</li>
+                            <li>Incluye nuevos sistemas: Herramientas fabricables (Tools), Emblemas (Crests), misiones de ciudad y música de Christopher Larkin.</li>
+                            <li>Hornet mantiene su identidad, origen y personalidad presentados en Hollow Knight.</li>
+                        </ul>
+                    </article>
+
+                    <article class="glass-card">
+                        <div class="card-meta">TEORÍAS DE LA COMUNIDAD // NO CONFIRMADAS</div>
+                        <h3>Conexiones especuladas (con cautela)</h3>
+                        <p>La comunidad debate si Silksong ocurre después de alguno de los finales de Hollow Knight (como <em>Aceptar el Vacío</em>) o si Team Cherry mantendrá una continuidad abierta donde todos los finales sigan siendo válidos, así como el posible origen de la tribu de las Tejedoras en Pharloom.</p>
+                        <div class="spoiler-box">
+                            <button type="button" class="spoiler-toggle" aria-expanded="false">⚠ Nota sobre posibles spoilers de continuidad</button>
+                            <p class="spoiler-content" hidden>En el final "Aceptar el Vacío" de Godmaster, Hornet se enfrenta al Hollow Knight liberado frente al Templo del Huevo Negro; sin embargo, Team Cherry ha declarado que no pretende establecer un único final canónico excluyente.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Galería de capturas oficiales de Silksong -->
+                <div class="silksong-gallery reveal">
+                    <h3 class="sub-heading">Capturas Oficiales de Hollow Knight: Silksong</h3>
+                    <div class="silksong-screen-grid">
+                        <figure class="silksong-fig glass-card">
+                            <img src="assets/images/silksong/silksong-screen-1.jpg" alt="Captura oficial 1 de Hollow Knight: Silksong" loading="lazy" class="silksong-screen-img zoomable-img" data-zoom-src="assets/images/silksong/silksong-screen-1.jpg" data-zoom-caption="Hollow Knight: Silksong — Exploración en Pharloom (Captura oficial de Steam)" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                            <figcaption>Exploración y ambientación en Pharloom</figcaption>
+                        </figure>
+                        <figure class="silksong-fig glass-card">
+                            <img src="assets/images/silksong/silksong-screen-2.jpg" alt="Captura oficial 2 de Hollow Knight: Silksong" loading="lazy" class="silksong-screen-img zoomable-img" data-zoom-src="assets/images/silksong/silksong-screen-2.jpg" data-zoom-caption="Hollow Knight: Silksong — Combate acrobático de Hornet (Captura oficial de Steam)" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                            <figcaption>Combate ágil con aguja e hilo</figcaption>
+                        </figure>
+                        <figure class="silksong-fig glass-card">
+                            <img src="assets/images/silksong/silksong-screen-3.jpg" alt="Captura oficial 3 de Hollow Knight: Silksong" loading="lazy" class="silksong-screen-img zoomable-img" data-zoom-src="assets/images/silksong/silksong-screen-3.jpg" data-zoom-caption="Hollow Knight: Silksong — Arquitectura y criaturas de Pharloom (Captura oficial de Steam)" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                            <figcaption>Nuevos biomas y criaturas de Pharloom</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 09: ARQUITECTURA TÉCNICA DETRÁS DEL JUEGO (ORIGINAL CONSERVADA) -->
+        <section id="tecnica" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">09 // INGENIERÍA & PIPELINE</span>
+                    <h2 class="section-title">La Parte Técnica Detrás de la Creación</h2>
+                    <p class="section-desc">Cómo Team Cherry logró un control preciso, atmósfera envolvente y fluidez en Unity 2D.</p>
+                </div>
+
+                <div class="tech-dashboard">
+                    <div class="tech-card glass-panel reveal">
+                        <div class="tech-icon">⚙</div>
+                        <span class="mono-label">MOTOR & ARQUITECTURA</span>
+                        <h3>Unity Engine + C# + PlayMaker</h3>
+                        <p>Construido en Unity combinando scripts en C# con <strong>PlayMaker</strong> para máquinas de estados visuales, facilitando iterar patrones de IA, estados de jefes y mecánicas de combate con rapidez.</p>
+                        <ul class="tech-specs">
+                            <li><span>Game Feel:</span> Respuesta inmediata, buffer de salto/ataque y retroceso controlado.</li>
+                            <li><span>Hitboxes:</span> Cajas precisas para priorizar justicia en el combate.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-card glass-panel reveal">
+                        <div class="tech-icon">◈</div>
+                        <span class="mono-label">ILUSIÓN DE PROFUNDIDAD</span>
+                        <h3>Parallax Multi-Capa 2.5D</h3>
+                        <p>Los escenarios se disponen en múltiples planos de profundidad dentro del espacio de Unity, combinando arte dibujado a mano con desenfoque de cámara, iluminación radial y partículas.</p>
+                        <ul class="tech-specs">
+                            <li><span>Capas:</span> Primer plano, plano jugable y fondos escalonados.</li>
+                            <li><span>Atmósfera:</span> Lluvia, esporas, ceniza o niebla según el bioma.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-card glass-panel reveal">
+                        <div class="tech-icon">♫</div>
+                        <span class="mono-label">DISEÑO SONORO ADAPTATIVO</span>
+                        <h3>Christopher Larkin & Audio Dinámico</h3>
+                        <p>Partitura melancólica y acústica que acompaña la soledad y la épica de Hallownest, integrada con efectos de sonido nítidos para el aguijón, pasos, agua y enemigos.</p>
+                        <ul class="tech-specs">
+                            <li><span>Identidad:</span> Motivos musicales únicos por zona y jefe.</li>
+                            <li><span>Inmersión:</span> Silencios y ecos que refuerzan la escala subterránea.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 10: EQUIPO CREADOR & IMPACTO EN LA INDUSTRIA (CONSERVADA + RETRATOS) -->
+        <section id="industria" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">10 // TEAM CHERRY & INDUSTRIA</span>
+                    <h2 class="section-title">Creadores y Legado en la Industria</h2>
+                    <p class="section-desc">Surgido de una game jam y financiado en Kickstarter, se consolidó como un referente moderno del metroidvania independiente.</p>
+                </div>
+
+                <div class="team-grid reveal">
+                    <div class="member-card glass-card">
+                        <div class="member-avatar-wrap">
+                            <img src="https://static.wikia.nocookie.net/hollowknight/images/2/24/Ari_Gibson.png/revision/latest" alt="Ari Gibson" loading="lazy" class="member-avatar" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                        </div>
+                        <div class="member-role">CO-DIRECTOR // ARTE & ANIMACIÓN</div>
+                        <h3>Ari Gibson</h3>
+                        <p>Dirección artística, ilustración tradicional, diseño de personajes y biomas, y co-creación del universo narrativo de Hallownest.</p>
+                    </div>
+
+                    <div class="member-card glass-card">
+                        <div class="member-avatar-wrap">
+                            <img src="https://static.wikia.nocookie.net/hollowknight/images/6/69/William_Pellen.png/revision/latest" alt="William Pellen" loading="lazy" class="member-avatar" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                        </div>
+                        <div class="member-role">CO-DIRECTOR // DISEÑO & PROGRAMACIÓN</div>
+                        <h3>William Pellen</h3>
+                        <p>Diseño del mundo interconectado, mecánicas de movimiento y combate, programación y comportamiento de enemigos y jefes.</p>
+                    </div>
+
+                    <div class="member-card glass-card">
+                        <div class="member-avatar-wrap">
+                            <img src="assets/images/characters/christopher-larkin.jpg" alt="Christopher Larkin" loading="lazy" class="member-avatar" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                        </div>
+                        <div class="member-role">COMPOSITOR // AUDIO & BANDA SONORA</div>
+                        <h3>Christopher Larkin</h3>
+                        <p>Composición de la banda sonora original y diseño de audio que define el tono emocional y táctil del juego.</p>
+                    </div>
+
+                    <div class="member-card glass-card">
+                        <div class="member-avatar-wrap">
+                            <img src="https://static.wikia.nocookie.net/hollowknight/images/0/0e/Team_Cherry_Logo.png/revision/latest" alt="Logo de Team Cherry" loading="lazy" class="member-avatar member-logo" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                        </div>
+                        <div class="member-role">SOPORTE TÉCNICO & PORTING</div>
+                        <h3>David Kazi & Jack Vine</h3>
+                        <p>Aporte en programación técnica, optimización y adaptación del juego a distintas plataformas.</p>
+                    </div>
+                </div>
+
+                <div class="external-hub glass-panel reveal">
+                    <div class="hub-info">
+                        <span class="mono-label">EXTERNAL_NODES // VERIFICACIÓN & CRÍTICA</span>
+                        <h3>Portales Especializados y Recursos Oficiales</h3>
+                        <p>Consulta reseñas, el sitio oficial del estudio y bases de datos comunitarias que sirvieron como referencia y fuente visual.</p>
+                    </div>
+                    <div class="hub-links">
+                        <a href="https://www.metacritic.com/game/hollow-knight/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Metacritic</span>
+                            <span class="ext-desc">Puntuación y reseñas críticas ↗</span>
+                        </a>
+                        <a href="https://www.teamcherry.com.au/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Team Cherry Oficial</span>
+                            <span class="ext-desc">Sitio del estudio desarrollador ↗</span>
+                        </a>
+                        <a href="https://hollowknight.wiki/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Hollow Knight Wiki</span>
+                            <span class="ext-desc">Lore, biomas, personajes y jefes ↗</span>
+                        </a>
+                        <a href="https://store.steampowered.com/app/367520/Hollow_Knight/" target="_blank" rel="noopener noreferrer" class="ext-link">
+                            <span class="ext-title">Steam Store</span>
+                            <span class="ext-desc">Ficha oficial y reseñas de usuarios ↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-left">
+                <span class="brand-title">HALLOWNEST // ARCHIVE</span>
+                <p>Archivo fan de carácter informativo. Hollow Knight y Hollow Knight: Silksong son marcas y obras de Team Cherry. Recursos visuales referenciados de materiales oficiales de Team Cherry (Steam), Hollow Knight Wiki y portadas oficiales de Christopher Larkin.</p>
+            </div>
+            <div class="footer-right mono-label">
+                <span>RENDER: VANILLA JS / CSS3</span>
+                <span>NO COST TOO GREAT</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Inspección de Biomas (Conservado y ampliado con imagen real) -->
+    <div class="modal-backdrop" id="art-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-window glass-panel">
+            <button class="modal-close" id="modal-close" aria-label="Cerrar ventana">✕</button>
+            <div class="modal-visual" id="modal-visual"></div>
+            <div class="modal-body">
+                <div class="modal-meta">
+                    <span class="mono-tag" id="modal-category">CATEGORÍA</span>
+                    <span class="mono-label" id="modal-palette">PALETA HEX</span>
+                </div>
+                <h3 id="modal-title">Título</h3>
+                <p id="modal-desc">Descripción...</p>
+                <div class="modal-tech-note">
+                    <span class="mono-label">FICHA DEL BIOMA Y DIRECCIÓN VISUAL:</span>
+                    <div id="modal-note"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Universal para Ampliar Imágenes -->
+    <div class="lightbox-backdrop" id="image-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+        <button class="modal-close lightbox-close" id="lightbox-close" aria-label="Cerrar imagen ampliada">✕</button>
+        <div class="lightbox-inner">
+            <img id="lightbox-img" src="assets/images/fallback.svg" alt="Imagen ampliada">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
