@@ -735,7 +735,7 @@ body {
 
 .dlc-media {
     position: relative;
-    height: 220px;
+    height: 260px;
     overflow: hidden;
     border-bottom: 1px solid var(--border-subtle);
     background: #06080d;
@@ -745,6 +745,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 22%;
     display: block;
     transition: transform 0.45s ease;
 }
@@ -1847,5 +1848,1394 @@ body {
 
     .footer-right {
         text-align: left;
+    }
+}
+
+
+/* =========================================================================
+   MEJORAS DE ACCESIBILIDAD Y ENFOQUE POR TECLADO
+   ========================================================================= */
+:focus-visible {
+    outline: 2px solid var(--soul-cyan);
+    outline-offset: 2px;
+}
+
+.btn-parchment {
+    background: linear-gradient(135deg, #e7d1a5 0%, #c8a263 100%);
+    color: #1f140b;
+    border: 1px solid rgba(244, 224, 182, 0.7);
+    box-shadow: 0 6px 20px rgba(200, 162, 99, 0.22);
+}
+
+.btn-parchment:hover {
+    background: linear-gradient(135deg, #f3e2be 0%, #d8b578 100%);
+    transform: translateY(-2px);
+}
+
+/* =========================================================================
+   SECCIÓN 01B: ENCICLOPEDIA COMPLETA DE PERSONAJES (AMPLIACIÓN DE #historia)
+   ========================================================================= */
+.npc-encyclopedia-block {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.subsection-header {
+    max-width: 780px;
+    margin-bottom: 1.75rem;
+}
+
+.npc-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+
+.npc-filter-bar {
+    margin-bottom: 0;
+}
+
+.npc-search-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.npc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+    gap: 1.25rem;
+}
+
+.npc-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.npc-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.npc-avatar-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--border-strong);
+    background: radial-gradient(circle, rgba(124, 232, 255, 0.16), rgba(7, 9, 14, 0.92));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+}
+
+.npc-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.npc-card-title h4 {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    color: var(--pale-white);
+    line-height: 1.25;
+}
+
+.npc-card-loc {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--soul-cyan);
+    margin-top: 0.2rem;
+}
+
+.npc-card-summary {
+    font-size: 0.87rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.npc-card-footer {
+    margin-top: auto;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(124, 232, 255, 0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.crossref-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 99px;
+    background: rgba(216, 179, 114, 0.14);
+    border: 1px solid rgba(216, 179, 114, 0.48);
+    color: #f0d7a7;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    text-decoration: none;
+}
+
+.crossref-pill:hover {
+    background: rgba(216, 179, 114, 0.28);
+    color: #fff6e3;
+}
+
+.boss-crossref-row {
+    margin-top: 0.65rem;
+    padding-top: 0.65rem;
+    border-top: 1px dashed rgba(216, 179, 114, 0.28);
+}
+
+/* Modal Dossier de Personaje */
+.char-modal-hero {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.15rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.char-modal-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px solid var(--border-strong);
+    background: radial-gradient(circle, rgba(124, 232, 255, 0.18), rgba(7, 9, 14, 0.92));
+    padding: 0.45rem;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.char-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+}
+
+.char-modal-field {
+    background: rgba(7, 9, 14, 0.58);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+}
+
+.char-modal-field p {
+    margin: 0.3rem 0 0 !important;
+    font-size: 0.89rem !important;
+    color: var(--text-muted);
+}
+
+.char-modal-quote {
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--soul-cyan);
+    background: rgba(124, 232, 255, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--pale-white);
+    font-size: 0.93rem;
+}
+
+/* =========================================================================
+   SECCIÓN 04B: DIARIO DEL CAZADOR (ESTÉTICA DE PERGAMINO ANTIGUO AL 100 %)
+   ========================================================================= */
+.bestiary-section {
+    background:
+        radial-gradient(circle at 50% 0%, rgba(164, 122, 68, 0.14), transparent 55%),
+        linear-gradient(180deg, rgba(10, 12, 18, 0.95) 0%, rgba(18, 14, 10, 0.96) 50%, rgba(10, 12, 18, 0.95) 100%);
+    border-top: 1px solid rgba(196, 155, 92, 0.28);
+    border-bottom: 1px solid rgba(196, 155, 92, 0.28);
+}
+
+.hunter-journal-shell {
+    position: relative;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 250, 238, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at 82% 88%, rgba(154, 114, 62, 0.24) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, rgba(90, 62, 34, 0.025) 0px, rgba(90, 62, 34, 0.025) 1px, transparent 1px, transparent 28px),
+        linear-gradient(160deg, #f5ebd4 0%, #ebd9b6 48%, #e2c99c 100%);
+    color: #2b1d12;
+    border-radius: 14px;
+    border: 2px solid #8a6638;
+    box-shadow:
+        inset 0 0 65px rgba(86, 56, 24, 0.28),
+        inset 0 0 0 6px rgba(138, 102, 56, 0.18),
+        0 26px 60px rgba(0, 0, 0, 0.62);
+    padding: 2.75rem 2.25rem;
+    font-family: 'EB Garamond', Georgia, serif;
+}
+
+.journal-corner {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #6e4e26;
+    pointer-events: none;
+    opacity: 0.8;
+}
+.journal-corner.tl { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+.journal-corner.tr { top: 14px; right: 14px; border-left: none; border-bottom: none; }
+.journal-corner.bl { bottom: 14px; left: 14px; border-right: none; border-top: none; }
+.journal-corner.br { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+.journal-header {
+    text-align: center;
+    max-width: 840px;
+    margin: 0 auto 1.5rem;
+}
+
+.journal-crest {
+    font-size: 1.15rem;
+    letter-spacing: 0.45em;
+    color: #7c5628;
+    margin-bottom: 0.5rem;
+}
+
+.journal-kicker {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: #6b4820;
+    background: rgba(122, 86, 40, 0.12);
+    border: 1px solid rgba(122, 86, 40, 0.35);
+    padding: 0.28rem 0.75rem;
+    border-radius: 99px;
+    margin-bottom: 0.65rem;
+}
+
+.journal-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.95rem);
+    color: #24170c;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.65rem;
+}
+
+.journal-subtitle {
+    font-size: 1.14rem;
+    line-height: 1.58;
+    color: #46321f;
+}
+
+.journal-stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.j-stat {
+    background: rgba(255, 250, 238, 0.52);
+    border: 1px solid rgba(122, 86, 40, 0.35);
+    border-radius: 8px;
+    padding: 0.7rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.j-stat-val {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #2c1c0f;
+}
+
+.j-stat-lbl {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: #634424;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+.j-stat-fav {
+    border-color: rgba(158, 106, 30, 0.55);
+    background: rgba(242, 217, 162, 0.55);
+}
+
+.journal-ornament-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    color: #7c5628;
+    font-size: 1.25rem;
+}
+
+.journal-ornament-divider::before,
+.journal-ornament-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #8b6738, transparent);
+}
+
+.journal-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.75rem;
+}
+
+.journal-search-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.8fr) repeat(4, minmax(145px, 1fr));
+    gap: 0.65rem;
+}
+
+.journal-input,
+.journal-select {
+    width: 100%;
+    padding: 0.62rem 0.85rem;
+    border-radius: 7px;
+    border: 1px solid #967242;
+    background: rgba(255, 250, 240, 0.84);
+    color: #24170c;
+    font-family: var(--font-sans);
+    font-size: 0.84rem;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.journal-input::placeholder {
+    color: #765839;
+}
+
+.journal-input:focus,
+.journal-select:focus {
+    border-color: #5b3b18;
+    box-shadow: 0 0 0 2px rgba(138, 102, 56, 0.28);
+    background: #fffdf7;
+}
+
+.journal-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.journal-result-counter {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: #5c3e1e;
+    font-weight: 600;
+}
+
+.journal-reset-btn {
+    background: rgba(84, 55, 24, 0.12);
+    border: 1px solid #8a6638;
+    color: #362210;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    padding: 0.42rem 0.85rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.journal-reset-btn:hover {
+    background: #6c4a22;
+    color: #fbf3e2;
+}
+
+.bestiary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    gap: 1.05rem;
+}
+
+.bestiary-card {
+    background: linear-gradient(170deg, rgba(255, 251, 242, 0.86) 0%, rgba(238, 220, 184, 0.82) 100%);
+    border: 1px solid #a88351;
+    border-radius: 10px;
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 4px 14px rgba(62, 40, 16, 0.12);
+}
+
+.bestiary-card:hover {
+    transform: translateY(-4px);
+    border-color: #5c3a14;
+    box-shadow: 0 12px 24px rgba(52, 32, 12, 0.22);
+}
+
+.bestiary-card.is-special-record {
+    background: linear-gradient(155deg, #f8eccb 0%, #e7cc8c 100%);
+    border: 2px solid #8f631f;
+    box-shadow: inset 0 0 18px rgba(154, 108, 28, 0.2), 0 6px 18px rgba(62, 40, 16, 0.18);
+}
+
+.bestiary-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.bestiary-num {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: #6b4b26;
+    font-weight: 700;
+}
+
+.bestiary-fav-btn {
+    background: transparent;
+    border: 1px solid rgba(138, 102, 56, 0.4);
+    border-radius: 99px;
+    width: 26px;
+    height: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #8b683b;
+    font-size: 0.85rem;
+    transition: var(--transition-smooth);
+}
+
+.bestiary-fav-btn:hover,
+.bestiary-fav-btn.active {
+    background: #8c5a18;
+    border-color: #6e430c;
+    color: #fff6db;
+}
+
+.bestiary-thumb-wrap {
+    height: 112px;
+    border-radius: 8px;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(44, 30, 18, 0.9) 0%, rgba(22, 15, 10, 0.96) 100%);
+    border: 1px solid #8a6638;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem;
+    overflow: hidden;
+}
+
+.bestiary-card.is-special-record .bestiary-thumb-wrap {
+    background: radial-gradient(circle at 50% 50%, rgba(72, 49, 18, 0.92) 0%, rgba(28, 19, 8, 0.98) 100%);
+    border-color: #a6782a;
+}
+
+.bestiary-thumb {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.bestiary-card:hover .bestiary-thumb {
+    transform: scale(1.08);
+}
+
+.bestiary-card h3 {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    color: #24160b;
+    line-height: 1.25;
+}
+
+.bestiary-en {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: #684a2a;
+    margin-top: -0.25rem;
+}
+
+.bestiary-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: auto;
+    padding-top: 0.35rem;
+}
+
+.j-pill {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    padding: 0.18rem 0.48rem;
+    border-radius: 4px;
+    background: rgba(110, 74, 32, 0.12);
+    border: 1px solid rgba(110, 74, 32, 0.34);
+    color: #4a3014;
+}
+
+.j-pill.special {
+    background: #6c4610;
+    color: #fdf4de;
+    border-color: #533409;
+}
+
+.j-pill.boss {
+    background: rgba(154, 46, 22, 0.14);
+    border-color: rgba(154, 46, 22, 0.42);
+    color: #7d1e0b;
+}
+
+.bestiary-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2.25rem;
+    color: #5a3d1f;
+    font-size: 1.15rem;
+}
+
+/* Modal Pergamino de Ficha Individual del Diario del Cazador */
+.journal-modal-window {
+    max-width: 780px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(255, 252, 244, 0.65), transparent 50%),
+        linear-gradient(160deg, #f6edd8 0%, #ead6b0 55%, #dfc28e 100%);
+    color: #26180d;
+    border: 2px solid #8a6434;
+    box-shadow: inset 0 0 45px rgba(84, 52, 20, 0.26), 0 28px 70px rgba(0, 0, 0, 0.72);
+    font-family: 'EB Garamond', Georgia, serif;
+}
+
+.journal-modal-close {
+    background: #352212;
+    color: #f6ecd7;
+    border-color: #9e7744;
+}
+
+.journal-modal-close:hover {
+    background: #5a381b;
+    color: #fff;
+    border-color: #d4ad70;
+}
+
+.journal-modal-body {
+    padding: 2rem 2.15rem;
+}
+
+.jm-header {
+    display: grid;
+    grid-template-columns: 165px 1fr;
+    gap: 1.4rem;
+    align-items: center;
+    padding-bottom: 1.3rem;
+    border-bottom: 1px solid rgba(114, 78, 36, 0.35);
+    margin-bottom: 1.25rem;
+}
+
+.jm-portrait-frame {
+    height: 165px;
+    border-radius: 10px;
+    background: radial-gradient(circle, #2a1e15 0%, #120b07 100%);
+    border: 2px solid #8a6638;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem;
+}
+
+.jm-portrait-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.jm-title-area h3 {
+    font-family: var(--font-display);
+    font-size: 1.65rem;
+    color: #1f1309;
+    margin: 0.3rem 0 0.15rem;
+}
+
+.jm-en-sub {
+    font-style: italic;
+    font-size: 1.12rem;
+    color: #634424;
+    margin-bottom: 0.75rem;
+}
+
+.jm-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.55rem;
+}
+
+.jm-meta-box {
+    background: rgba(255, 250, 238, 0.58);
+    border: 1px solid rgba(138, 102, 56, 0.38);
+    border-radius: 6px;
+    padding: 0.45rem 0.65rem;
+}
+
+.jm-meta-box span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: #6d4b26;
+    text-transform: uppercase;
+}
+
+.jm-meta-box strong {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: #24160b;
+}
+
+.jm-hunter-quote {
+    background: rgba(94, 60, 24, 0.09);
+    border-left: 3px solid #7d5424;
+    border-right: 3px solid #7d5424;
+    border-radius: 6px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.25rem;
+}
+
+.jm-hunter-quote .jm-q-entry {
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: #24160b;
+    margin-bottom: 0.5rem;
+}
+
+.jm-hunter-quote .jm-q-note {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #4d341c;
+    border-top: 1px dashed rgba(114, 78, 36, 0.35);
+    padding-top: 0.5rem;
+}
+
+.jm-details-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+}
+
+.jm-detail-block {
+    background: rgba(255, 250, 240, 0.5);
+    border: 1px solid rgba(138, 102, 56, 0.32);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+}
+
+.jm-detail-block h4 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #6d4a22;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+}
+
+.jm-detail-block p {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: #352313;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.jm-actions {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.jm-btn {
+    background: #3d2714;
+    color: #f8eed9;
+    border: 1px solid #8a6638;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.jm-btn:hover {
+    background: #5b3b1e;
+}
+
+/* =========================================================================
+   SECCIÓN 06: COLECCIONABLES Y MISIONES SECUNDARIAS
+   ========================================================================= */
+.collectibles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 1.4rem;
+}
+
+.collectible-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.col-head {
+    display: flex;
+    align-items: center;
+    gap: 0.95rem;
+}
+
+.col-icon-wrap {
+    width: 62px;
+    height: 62px;
+    border-radius: 10px;
+    background: rgba(7, 9, 14, 0.78);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    flex-shrink: 0;
+}
+
+.col-icon-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.col-meta-list {
+    list-style: none;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.col-meta-list strong {
+    color: var(--soul-cyan);
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+}
+
+/* =========================================================================
+   SECCIÓN 07: CIVILIZACIONES, TRIBUS Y CULTURAS
+   ========================================================================= */
+.civs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(355px, 1fr));
+    gap: 1.5rem;
+}
+
+.civ-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.civ-specs {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 0.85rem;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+}
+
+.civ-specs div strong {
+    color: var(--pale-white);
+}
+
+/* =========================================================================
+   SECCIÓN 08: GUÍA VISUAL DE MECÁNICAS Y COMBATE
+   ========================================================================= */
+.mechanics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.45rem;
+}
+
+.mec-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.mec-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+}
+
+.mec-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: rgba(124, 232, 255, 0.1);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    flex-shrink: 0;
+}
+
+.mec-badge-init {
+    color: #9ae6b4;
+    border-color: rgba(154, 230, 180, 0.45);
+}
+
+.mec-badge-unlock {
+    color: #fbd38d;
+    border-color: rgba(251, 211, 141, 0.45);
+}
+
+.mec-list {
+    margin-left: 1.15rem;
+    color: var(--text-muted);
+    font-size: 0.87rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.nail-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    background: rgba(7, 9, 14, 0.58);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+}
+
+.nail-bar-row {
+    display: grid;
+    grid-template-columns: 78px 1fr 48px;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.nail-bar-track {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.nail-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #56b4d3, #7ce8ff);
+    border-radius: 99px;
+}
+
+.mec-ref-btn {
+    margin-top: auto;
+    align-self: flex-start;
+    background: rgba(124, 232, 255, 0.1);
+    border: 1px solid var(--border-strong);
+    color: var(--soul-cyan);
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.mec-ref-btn:hover {
+    background: rgba(124, 232, 255, 0.22);
+    color: var(--pale-white);
+}
+
+/* =========================================================================
+   SECCIÓN 09: FINALES, SECRETOS Y LORE PROFUNDO (CON BLOQUEO DE SPOILERS)
+   ========================================================================= */
+.spoiler-gate {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.75rem 2rem;
+    border-color: rgba(255, 107, 43, 0.45);
+    background: radial-gradient(circle at 50% 0%, rgba(255, 107, 43, 0.14), rgba(14, 18, 28, 0.88) 70%);
+}
+
+.spoiler-gate-icon {
+    font-size: 2.6rem;
+    color: var(--infection-orange);
+    margin-bottom: 0.75rem;
+}
+
+.spoiler-gate h3 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    margin-bottom: 0.75rem;
+}
+
+.spoiler-gate p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-size: 0.96rem;
+}
+
+.endings-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+
+.endings-grid,
+.lore-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.45rem;
+}
+
+.ending-card,
+.pillar-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.lore-badge-confirmed {
+    color: #9ae6b4;
+    border-color: rgba(154, 230, 180, 0.45);
+}
+
+.lore-badge-theory {
+    color: #ffb28c;
+    border-color: rgba(255, 107, 43, 0.45);
+}
+
+.pillar-block {
+    background: rgba(7, 9, 14, 0.55);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    font-size: 0.87rem;
+    color: var(--text-muted);
+}
+
+.pillar-block p {
+    margin-top: 0.35rem;
+}
+
+/* =========================================================================
+   SECCIÓN 10: LOGROS Y DESAFÍOS (63 LOGROS + SEGUIMIENTO MANUAL)
+   ========================================================================= */
+.ach-tracker-bar {
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.ach-progress-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 210px;
+}
+
+.ach-progress-info strong {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--soul-cyan);
+}
+
+.ach-progress-track {
+    flex: 1 1 220px;
+    height: 10px;
+    background: rgba(7, 9, 14, 0.85);
+    border: 1px solid var(--border-subtle);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.ach-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4fd1c5, #7ce8ff);
+    transition: width 0.35s ease;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.1rem;
+}
+
+.ach-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    position: relative;
+}
+
+.ach-card.completed {
+    border-color: rgba(124, 232, 255, 0.65);
+    background: rgba(24, 42, 62, 0.78);
+}
+
+.ach-top {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.ach-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    background: #06080d;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.ach-title-col {
+    flex: 1;
+    min-width: 0;
+}
+
+.ach-title-col h4 {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    color: var(--pale-white);
+}
+
+.ach-check-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: rgba(7, 9, 14, 0.72);
+    color: var(--text-muted);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+.ach-card.completed .ach-check-btn {
+    background: var(--soul-cyan);
+    color: var(--bg-void);
+    border-color: var(--soul-cyan);
+    font-weight: 700;
+}
+
+.ach-req {
+    margin-top: auto;
+    padding-top: 0.55rem;
+    border-top: 1px solid rgba(124, 232, 255, 0.12);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.ach-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+/* =========================================================================
+   SECCIÓN 11: CRONOLOGÍA VISUAL INTERACTIVA
+   ========================================================================= */
+.chronology-track {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    padding-left: 2rem;
+}
+
+.chronology-track::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--soul-cyan), rgba(255, 107, 43, 0.65), var(--soul-cyan));
+}
+
+.chrono-node {
+    position: relative;
+}
+
+.chrono-dot {
+    position: absolute;
+    left: -2.05rem;
+    top: 1.4rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--bg-void);
+    border: 3px solid var(--soul-cyan);
+    box-shadow: 0 0 12px rgba(124, 232, 255, 0.55);
+}
+
+.chrono-node.estimado .chrono-dot {
+    border-color: var(--infection-orange);
+    box-shadow: 0 0 12px rgba(255, 107, 43, 0.5);
+}
+
+.chrono-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.chrono-toggle {
+    margin-top: 0.7rem;
+    background: rgba(124, 232, 255, 0.08);
+    border: 1px solid var(--border-subtle);
+    color: var(--soul-cyan);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    padding: 0.36rem 0.72rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.chrono-toggle:hover {
+    background: rgba(124, 232, 255, 0.18);
+    color: var(--pale-white);
+}
+
+.chrono-extra {
+    margin-top: 0.7rem;
+    padding: 0.75rem 0.95rem;
+    background: rgba(7, 9, 14, 0.62);
+    border-left: 2px solid var(--soul-cyan);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.88rem;
+    color: var(--pale-white) !important;
+}
+
+/* =========================================================================
+   SECCIÓN 12: SECRETOS, CURIOSIDADES Y EASTER EGGS
+   ========================================================================= */
+.secrets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 1.35rem;
+}
+
+.secret-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.secret-how {
+    margin-top: auto;
+    padding-top: 0.65rem;
+    border-top: 1px dashed rgba(124, 232, 255, 0.22);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.secret-how strong {
+    color: var(--soul-cyan);
+}
+
+/* =========================================================================
+   MAPA INTERACTIVO AMPLIADO (MARCADORES + CONEXIÓN AL BESTIARIO)
+   ========================================================================= */
+.map-pins-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.map-pins-layer.pins-hidden {
+    opacity: 0;
+}
+
+.map-pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(7, 12, 22, 0.88);
+    border: 2px solid var(--soul-cyan);
+    color: var(--pale-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 12px rgba(124, 232, 255, 0.45);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    z-index: 3;
+}
+
+.map-pin::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--soul-cyan);
+}
+
+.map-pin:hover,
+.map-pin.active {
+    transform: translate(-50%, -50%) scale(1.25);
+    background: var(--infection-orange);
+    border-color: #fff2e6;
+    box-shadow: 0 0 18px rgba(255, 107, 43, 0.78);
+    z-index: 6;
+}
+
+.map-pin.active::after {
+    background: #fff;
+}
+
+.map-pin-tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: rgba(7, 9, 14, 0.94);
+    border: 1px solid var(--border-strong);
+    color: var(--pale-white);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.map-pin:hover .map-pin-tooltip,
+.map-pin.active .map-pin-tooltip,
+.map-pin:focus-visible .map-pin-tooltip {
+    opacity: 1;
+}
+
+.map-pins-toggle {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 8;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: rgba(7, 9, 14, 0.88);
+    color: var(--pale-white);
+    border: 1px solid var(--border-strong);
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.map-pins-toggle:hover {
+    border-color: var(--soul-cyan);
+    color: var(--soul-cyan);
+}
+
+.map-creature-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+}
+
+/* =========================================================================
+   RESPONSIVIDAD PARA LAS NUEVAS SECCIONES
+   ========================================================================= */
+@media (max-width: 1024px) {
+    .journal-search-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .journal-search-row .journal-input {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 720px) {
+    .hunter-journal-shell {
+        padding: 1.75rem 1.15rem;
+    }
+    .journal-search-row {
+        grid-template-columns: 1fr;
+    }
+    .bestiary-grid {
+        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    }
+    .jm-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .jm-portrait-frame {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+    .journal-modal-body {
+        padding: 1.45rem 1.15rem;
+    }
+    .char-modal-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .civs-grid,
+    .collectibles-grid,
+    .mechanics-grid,
+    .endings-grid,
+    .lore-pillars-grid,
+    .secrets-grid {
+        grid-template-columns: 1fr;
+    }
+    .map-pin {
+        width: 18px;
+        height: 18px;
     }
 }

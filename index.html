@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -30,35 +30,49 @@
                 <div class="nav-dropdown">
                     <a href="#historia" class="nav-item"><span class="nav-num">01</span> Mundo ▾</a>
                     <div class="dropdown-menu glass-panel">
-                        <a href="#historia" class="dropdown-link">01 · Historia y Personajes</a>
+                        <a href="#historia" class="dropdown-link">01 · Historia y Personajes (54)</a>
                         <a href="#expansiones" class="dropdown-link">02 · Expansiones Gratuitas</a>
-                        <a href="#arte" class="dropdown-link">03 · Biomas y Concept Art</a>
-                        <a href="#mapa" class="dropdown-link">06 · Cartografía de Hallownest</a>
+                        <a href="#arte" class="dropdown-link">03 · Biomas (14) y Concept Art</a>
+                        <a href="#civilizaciones" class="dropdown-link">07 · Civilizaciones y Tribus</a>
+                        <a href="#cronologia" class="dropdown-link">11 · Cronología de Hallownest</a>
+                        <a href="#mapa" class="dropdown-link">13 · Cartografía Interactiva</a>
                     </div>
                 </div>
 
                 <div class="nav-dropdown">
-                    <a href="#jefes" class="nav-item"><span class="nav-num">02</span> Archivo ▾</a>
+                    <a href="#bestiario" class="nav-item"><span class="nav-num">02</span> Archivo ▾</a>
                     <div class="dropdown-menu glass-panel">
                         <a href="#jefes" class="dropdown-link">04 · Jefes y Enemigos</a>
+                        <a href="#bestiario" class="dropdown-link">04B · Diario del Cazador (100%)</a>
                         <a href="#arsenal" class="dropdown-link">05 · Amuletos, Habilidades y Objetos</a>
+                        <a href="#coleccionables" class="dropdown-link">06 · Coleccionables y Misiones</a>
+                        <a href="#mecanicas" class="dropdown-link">08 · Guía de Mecánicas y Combate</a>
                     </div>
                 </div>
 
-                <a href="#musica" class="nav-item"><span class="nav-num">03</span> Música</a>
-                <a href="#silksong" class="nav-item"><span class="nav-num">04</span> Silksong</a>
+                <div class="nav-dropdown">
+                    <a href="#finales" class="nav-item"><span class="nav-num">03</span> Lore ▾</a>
+                    <div class="dropdown-menu glass-panel">
+                        <a href="#finales" class="dropdown-link">09 · Finales y Lore (Spoilers)</a>
+                        <a href="#logros" class="dropdown-link">10 · Logros y Desafíos (63)</a>
+                        <a href="#secretos" class="dropdown-link">12 · Secretos y Easter Eggs</a>
+                    </div>
+                </div>
+
+                <a href="#musica" class="nav-item"><span class="nav-num">04</span> Música</a>
+                <a href="#silksong" class="nav-item"><span class="nav-num">05</span> Silksong</a>
 
                 <div class="nav-dropdown">
-                    <a href="#tecnica" class="nav-item"><span class="nav-num">05</span> Estudio ▾</a>
+                    <a href="#tecnica" class="nav-item"><span class="nav-num">06</span> Estudio ▾</a>
                     <div class="dropdown-menu glass-panel">
-                        <a href="#tecnica" class="dropdown-link">09 · Arquitectura Técnica</a>
-                        <a href="#industria" class="dropdown-link">10 · Equipo e Industria</a>
+                        <a href="#tecnica" class="dropdown-link">16 · Arquitectura Técnica</a>
+                        <a href="#industria" class="dropdown-link">17 · Equipo e Industria</a>
                     </div>
                 </div>
 
                 <!-- Buscador General -->
                 <div class="nav-search-wrap">
-                    <input type="search" id="global-search" class="nav-search-input" placeholder="Buscar personajes, jefes, amuletos..." aria-label="Buscar en el archivo de Hallownest" autocomplete="off">
+                    <input type="search" id="global-search" class="nav-search-input" placeholder="Buscar bestiario, NPCs, logros..." aria-label="Buscar en el archivo de Hallownest" autocomplete="off">
                     <div class="search-results glass-panel" id="search-results" hidden></div>
                 </div>
             </nav>
@@ -85,6 +99,7 @@
 
                     <div class="hero-actions">
                         <a href="#historia" class="btn btn-primary">Personajes & Lore</a>
+                        <a href="#bestiario" class="btn btn-parchment">Diario del Cazador (100%)</a>
                         <a href="#arte" class="btn btn-ghost">Explorar Biomas</a>
                         <a href="#jefes" class="btn btn-ghost">Jefes & Amuletos</a>
                     </div>
@@ -133,8 +148,36 @@
                     <p class="section-desc">Hallownest nació de la voluntad del Rey Pálido y cayó ante el resurgimiento de El Resplandor. Cada personaje —incluyendo Cornifer, Zote y cada uno de los Tres Soñadores por separado— encarna un fragmento de esta tragedia.</p>
                 </div>
 
-                <!-- Renderizado dinámico con imágenes reales desde script.js -->
+                <!-- Renderizado dinámico con imágenes reales desde script.js (11 fichas principales originales) -->
                 <div class="lore-grid" id="characters-grid"></div>
+
+                <!-- ENCICLOPEDIA AMPLIADA DE PERSONAJES (SIN DUPLICAR LAS 11 FICHAS ANTERIORES) -->
+                <div class="npc-encyclopedia-block reveal" id="enciclopedia-personajes">
+                    <div class="subsection-header">
+                        <span class="section-tag">01B // ENCICLOPEDIA COMPLETA DE PERSONAJES</span>
+                        <h3 class="sub-heading">Habitantes, Comerciantes, Viajeros y Figuras de Hallownest</h3>
+                        <p class="section-desc">Complemento exhaustivo a los 11 personajes principales: explora comerciantes, maestros del aguijón, viajeros, NPCs de misiones, personajes de las expansiones y figuras históricas del lore. Haz clic en cualquier ficha para leer su dossier completo.</p>
+                    </div>
+
+                    <div class="npc-controls">
+                        <div class="filter-bar npc-filter-bar" role="tablist" aria-label="Filtrar personajes por rol">
+                            <button class="filter-btn npc-filter-btn active" data-npc-cat="all">Todos</button>
+                            <button class="filter-btn npc-filter-btn" data-npc-cat="comerciantes">Comerciantes</button>
+                            <button class="filter-btn npc-filter-btn" data-npc-cat="viajeros">Viajeros</button>
+                            <button class="filter-btn npc-filter-btn" data-npc-cat="aliados">Aliados</button>
+                            <button class="filter-btn npc-filter-btn" data-npc-cat="habitantes">Habitantes</button>
+                            <button class="filter-btn npc-filter-btn" data-npc-cat="maestros">Maestros del Aguijón</button>
+                            <button class="filter-btn npc-filter-btn" data-npc-cat="expansiones">Expansiones</button>
+                            <button class="filter-btn npc-filter-btn" data-npc-cat="lore">Históricos y Lore</button>
+                        </div>
+                        <div class="npc-search-row">
+                            <input type="search" id="npc-local-search" class="subfilter-input" placeholder="Buscar personaje por nombre, ubicación o historia..." aria-label="Buscar en la enciclopedia de personajes">
+                            <span class="mono-tag" id="npc-count-badge">0 personajes</span>
+                        </div>
+                    </div>
+
+                    <div class="npc-grid" id="extended-characters-grid"></div>
+                </div>
             </div>
         </section>
 
@@ -182,7 +225,7 @@
                 <div class="section-header reveal">
                     <span class="section-tag">03 // BIOMAS DE HALLOWNEST & ARTE</span>
                     <h2 class="section-title">Cartografía, Ambientación y Concept Art</h2>
-                    <p class="section-desc">Explora los 13 biomas clave de Hallownest y el proceso artístico 2D con capturas reales del juego. Haz clic en cualquier tarjeta para abrir su ficha completa con imagen ampliada.</p>
+                    <p class="section-desc">Explora los 14 biomas clave de Hallownest y el proceso artístico 2D con capturas reales del juego. Haz clic en cualquier tarjeta para abrir su ficha completa con imagen ampliada.</p>
                 </div>
 
                 <!-- Filtros Dinámicos Originales -->
@@ -222,6 +265,97 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 04B: BESTIARIO COMPLETO — DIARIO DEL CAZADOR AL 100 % -->
+        <section id="bestiario" class="section bestiary-section">
+            <div class="container">
+                <div class="hunter-journal-shell reveal">
+                    <div class="journal-corner tl" aria-hidden="true"></div>
+                    <div class="journal-corner tr" aria-hidden="true"></div>
+                    <div class="journal-corner bl" aria-hidden="true"></div>
+                    <div class="journal-corner br" aria-hidden="true"></div>
+
+                    <header class="journal-header">
+                        <div class="journal-crest" aria-hidden="true">✦ ◈ ✦</div>
+                        <span class="journal-kicker">DIARIO DEL CAZADOR // EDICIÓN COMPLETA AL 100 %</span>
+                        <h2 class="journal-title">El Diario del Cazador</h2>
+                        <p class="journal-subtitle">Registro completo de las <strong>168 entradas oficiales</strong> de Hollow Knight: las 146 especies base requeridas para la Marca del Cazador, las 18 entradas adicionales y de expansiones (164 criaturas y jefes en total) y los 4 registros especiales de reliquias y desafíos. Todas las fichas se muestran descubiertas, ilustradas y consultables desde el primer momento.</p>
+
+                        <div class="journal-stats-strip">
+                            <div class="j-stat">
+                                <span class="j-stat-val">168</span>
+                                <span class="j-stat-lbl">Entradas Totales</span>
+                            </div>
+                            <div class="j-stat">
+                                <span class="j-stat-val">146</span>
+                                <span class="j-stat-lbl">Base (Marca del Cazador)</span>
+                            </div>
+                            <div class="j-stat">
+                                <span class="j-stat-val">18</span>
+                                <span class="j-stat-lbl">Opcionales y Expansiones</span>
+                            </div>
+                            <div class="j-stat">
+                                <span class="j-stat-val">4</span>
+                                <span class="j-stat-lbl">Registros Especiales</span>
+                            </div>
+                            <div class="j-stat j-stat-fav">
+                                <span class="j-stat-val" id="bestiary-fav-count">0</span>
+                                <span class="j-stat-lbl">★ Favoritas (Opcional)</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="journal-ornament-divider" aria-hidden="true"><span>❦</span></div>
+
+                    <!-- Controles de búsqueda, filtros y orden del Diario -->
+                    <div class="journal-controls">
+                        <div class="journal-search-row">
+                            <input type="search" id="bestiary-search" class="journal-input" placeholder="Buscar criatura por nombre en español o inglés (ej. Áspid, Mantis, Grimm, Nosk)..." aria-label="Buscar en el Diario del Cazador">
+                            <select id="bestiary-category" class="journal-select" aria-label="Filtrar por categoría">
+                                <option value="all">Todas las categorías</option>
+                                <option value="comun">Enemigos Comunes</option>
+                                <option value="especial">Enemigos Especiales</option>
+                                <option value="variante">Variantes de Enemigos</option>
+                                <option value="volador">Criaturas Voladoras</option>
+                                <option value="terrestre">Criaturas Terrestres</option>
+                                <option value="acuatico">Criaturas Acuáticas</option>
+                                <option value="jefe-principal">Jefes Principales</option>
+                                <option value="jefe-opcional">Jefes Opcionales</option>
+                                <option value="jefe-onirico">Jefes Oníricos</option>
+                                <option value="guerrero-onirico">Guerreros Oníricos</option>
+                                <option value="panteon">Jefes de Panteones</option>
+                                <option value="registro-especial">Registros Especiales (4)</option>
+                            </select>
+                            <select id="bestiary-region" class="journal-select" aria-label="Filtrar por región">
+                                <option value="all">Todas las regiones</option>
+                            </select>
+                            <select id="bestiary-expansion" class="journal-select" aria-label="Filtrar por expansión">
+                                <option value="all">Todas las versiones</option>
+                                <option value="base">Juego Base</option>
+                                <option value="hidden-dreams">Hidden Dreams</option>
+                                <option value="grimm-troupe">The Grimm Troupe</option>
+                                <option value="lifeblood">Lifeblood</option>
+                                <option value="godmaster">Godmaster</option>
+                            </select>
+                            <select id="bestiary-sort" class="journal-select" aria-label="Ordenar entradas">
+                                <option value="journal">Orden del Diario (1–168)</option>
+                                <option value="az">Alfabético (A–Z)</option>
+                                <option value="za">Alfabético (Z–A)</option>
+                                <option value="favorites">Solo Favoritas ★</option>
+                            </select>
+                        </div>
+
+                        <div class="journal-toolbar">
+                            <span class="journal-result-counter" id="bestiary-counter">Mostrando 168 de 168 entradas</span>
+                            <button type="button" class="journal-reset-btn" id="bestiary-reset">↺ Mostrar todas las criaturas</button>
+                        </div>
+                    </div>
+
+                    <!-- Rejilla de páginas del Diario del Cazador -->
+                    <div class="bestiary-grid" id="bestiary-grid"></div>
+                </div>
+            </div>
+        </section>
+
         <!-- SECCIÓN 05 (06 DEL PROMPT): AMULETOS, HABILIDADES, HECHIZOS Y OBJETOS -->
         <section id="arsenal" class="section">
             <div class="container">
@@ -256,6 +390,162 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 06: COLECCIONABLES Y MISIONES SECUNDARIAS -->
+        <section id="coleccionables" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">06 // EXPLORACIÓN & MISIONES</span>
+                    <h2 class="section-title">Coleccionables, Reliquias y Misiones Secundarias</h2>
+                    <p class="section-desc">Guía organizada por categoría y región de todas las Larvas, Fragmentos de Máscara y Vasija, Reliquias para Lemm, Raíces Susurrantes, Estaciones de Ciervo, lugares secretos y cadenas de misiones opcionales.</p>
+                </div>
+
+                <div class="filter-bar reveal" role="tablist" aria-label="Filtros de Coleccionables y Misiones">
+                    <button class="filter-btn col-filter-btn active" data-col-cat="all">Todos</button>
+                    <button class="filter-btn col-filter-btn" data-col-cat="coleccionable">Coleccionables</button>
+                    <button class="filter-btn col-filter-btn" data-col-cat="reliquia">Reliquias de Hallownest</button>
+                    <button class="filter-btn col-filter-btn" data-col-cat="exploracion">Viaje y Estaciones</button>
+                    <button class="filter-btn col-filter-btn" data-col-cat="mision">Misiones Secundarias</button>
+                    <button class="filter-btn col-filter-btn" data-col-cat="secreto">Lugares Secretos</button>
+                </div>
+
+                <div class="collectibles-grid" id="collectibles-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 07: CIVILIZACIONES, TRIBUS Y CULTURAS -->
+        <section id="civilizaciones" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">07 // SOCIEDADES & CULTURAS</span>
+                    <h2 class="section-title">Civilizaciones, Tribus y Culturas de Hallownest</h2>
+                    <p class="section-desc">Más allá del reino fundado por el Rey Pálido, el subsuelo alberga tribus ancestrales, comunidades independientes y órdenes foráneas con costumbres, orígenes e historia propia.</p>
+                </div>
+
+                <div class="civs-grid" id="civilizations-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 08: GUÍA VISUAL DE MECÁNICAS Y COMBATE -->
+        <section id="mecanicas" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">08 // SISTEMAS DE JUEGO</span>
+                    <h2 class="section-title">Guía de Mecánicas y Combate</h2>
+                    <p class="section-desc">Manual estructurado que distingue las habilidades disponibles desde el inicio de las mejoras desbloqueables durante la exploración, enlazando directamente a las fichas del Arsenal.</p>
+                </div>
+
+                <div class="filter-bar reveal" role="tablist" aria-label="Filtrar mecánicas">
+                    <button class="filter-btn mec-filter-btn active" data-mec-phase="all">Todas las Mecánicas</button>
+                    <button class="filter-btn mec-filter-btn" data-mec-phase="inicial">Iniciales y Base</button>
+                    <button class="filter-btn mec-filter-btn" data-mec-phase="desbloqueable">Desbloqueables</button>
+                </div>
+
+                <div class="mechanics-grid" id="mechanics-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 09: FINALES, SECRETOS Y LORE PROFUNDO (CON BLOQUEO DE SPOILERS) -->
+        <section id="finales" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">09 // ARCHIVO RESTRINGIDO // SPOILERS</span>
+                    <h2 class="section-title">Finales, Secretos y Lore Profundo</h2>
+                    <p class="section-desc">Análisis verificado de los 5 finales oficiales, el epílogo secreto y los grandes pilares narrativos del juego, diferenciando estrictamente hechos confirmados de interpretaciones de la comunidad.</p>
+                </div>
+
+                <div class="spoiler-gate glass-panel reveal" id="endings-spoiler-gate">
+                    <div class="spoiler-gate-icon" aria-hidden="true">⚠</div>
+                    <h3>Advertencia de Spoilers Mayores de Historia</h3>
+                    <p>Este apartado revela los requisitos y desenlaces de los cinco finales de Hollow Knight (incluyendo Godmaster), la verdadera naturaleza de El Vacío, el destino del Rey Pálido, El Resplandor y El Hollow Knight.</p>
+                    <button type="button" class="btn btn-primary" id="unlock-endings-btn">Desbloquear Finales y Lore Profundo</button>
+                </div>
+
+                <div id="endings-content" hidden>
+                    <div class="endings-toolbar">
+                        <span class="mono-tag">ARCHIVO DESBLOQUEADO // HECHOS VERIFICADOS + INTERPRETACIONES SEÑALADAS</span>
+                        <button type="button" class="filter-btn" id="lock-endings-btn">🔒 Volver a ocultar spoilers</button>
+                    </div>
+                    <h3 class="sub-heading">Los 5 Finales Oficiales y Epílogo Secreto</h3>
+                    <div class="endings-grid" id="endings-grid"></div>
+
+                    <h3 class="sub-heading" style="margin-top: 2.5rem;">Pilares Fundamentales del Lore</h3>
+                    <div class="lore-pillars-grid" id="lore-pillars-grid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 10: LOGROS Y DESAFÍOS (63 LOGROS CON SEGUIMIENTO MANUAL) -->
+        <section id="logros" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">10 // PROGRESIÓN & DESAFÍOS</span>
+                    <h2 class="section-title">Logros y Desafíos Oficiales (63)</h2>
+                    <p class="section-desc">Catálogo completo de los 63 logros de Hollow Knight (PC, Xbox y Gestas de Nintendo Switch), todos visibles desde el principio con seguimiento manual opcional guardado en tu navegador.</p>
+                </div>
+
+                <div class="ach-tracker-bar glass-panel reveal">
+                    <div class="ach-progress-info">
+                        <span class="mono-label">SEGUIMIENTO PERSONAL (OPCIONAL)</span>
+                        <strong id="ach-progress-text">0 / 63 completados (0%)</strong>
+                    </div>
+                    <div class="ach-progress-track" aria-hidden="true">
+                        <div class="ach-progress-fill" id="ach-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <button type="button" class="filter-btn" id="ach-reset-progress">Reiniciar marcas</button>
+                </div>
+
+                <div class="filter-bar reveal" role="tablist" aria-label="Filtrar logros por categoría">
+                    <button class="filter-btn ach-filter-btn active" data-ach-cat="all">Todos (63)</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="historia">Historia</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="exploracion">Exploración</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="combate">Combate</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="coleccionables">Coleccionables</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="misiones">Misiones</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="desafios">Desafíos</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="panteones">Panteones</button>
+                    <button class="filter-btn ach-filter-btn" data-ach-cat="finales">Finales y Especiales</button>
+                </div>
+
+                <div class="achievements-grid" id="achievements-grid"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 11: CRONOLOGÍA VISUAL DE HALLOWNEST -->
+        <section id="cronologia" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">11 // LÍNEA TEMPORAL HISTÓRICA</span>
+                    <h2 class="section-title">Cronología de Hallownest</h2>
+                    <p class="section-desc">Recorrido interactivo desde las eras anteriores al reino hasta los acontecimientos de la aventura principal. Cada hito indica claramente si su posición temporal está confirmada o estimada.</p>
+                </div>
+
+                <div class="chronology-track" id="chronology-track"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 12: SECRETOS, CURIOSIDADES Y EASTER EGGS -->
+        <section id="secretos" class="section section-alt">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-tag">12 // HALLAZGOS VERIFICADOS</span>
+                    <h2 class="section-title">Secretos, Curiosidades y Easter Eggs</h2>
+                    <p class="section-desc">Habitaciones ocultas, diálogos secretos, interacciones poco conocidas, detalles ambientales, curiosidades de desarrollo y referencias verificadas de Team Cherry.</p>
+                </div>
+
+                <div class="filter-bar reveal" role="tablist" aria-label="Filtrar secretos por temática">
+                    <button class="filter-btn sec-filter-btn active" data-sec-theme="all">Todos</button>
+                    <button class="filter-btn sec-filter-btn" data-sec-theme="habitaciones">Habitaciones Ocultas</button>
+                    <button class="filter-btn sec-filter-btn" data-sec-theme="interacciones">Interacciones</button>
+                    <button class="filter-btn sec-filter-btn" data-sec-theme="dialogos">Diálogos Secretos</button>
+                    <button class="filter-btn sec-filter-btn" data-sec-theme="ambientales">Detalles Ambientales</button>
+                    <button class="filter-btn sec-filter-btn" data-sec-theme="expansiones">Expansiones</button>
+                    <button class="filter-btn sec-filter-btn" data-sec-theme="desarrollo">Desarrollo y Silksong</button>
+                </div>
+
+                <div class="secrets-grid" id="secrets-grid"></div>
+            </div>
+        </section>
+
         <!-- SECCIÓN 06 (07 DEL PROMPT): CARTOGRAFÍA DE HALLOWNEST -->
         <section id="mapa" class="section section-alt">
             <div class="container">
@@ -266,13 +556,15 @@
                 </div>
 
                 <div class="map-showcase glass-panel reveal">
-                    <div class="map-image-wrap">
+                    <div class="map-image-wrap" id="map-image-wrap">
                         <img src="https://static.wikia.nocookie.net/hollowknight/images/9/9c/Clean_map_updated.png/revision/latest" alt="Mapa general completo de Hallownest" loading="lazy" class="map-main-img zoomable-img" data-zoom-src="https://static.wikia.nocookie.net/hollowknight/images/9/9c/Clean_map_updated.png/revision/latest" data-zoom-caption="Mapa general completo de Hallownest (haz clic fuera o pulsa Escape para cerrar)" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                        <div class="map-pins-layer" id="map-pins-layer" aria-label="Marcadores interactivos de regiones"></div>
+                        <button type="button" class="map-pins-toggle" id="map-pins-toggle" aria-pressed="true">📍 Ocultar marcadores</button>
                         <span class="map-zoom-badge">🔍 Clic en el mapa para ampliar</span>
                     </div>
 
                     <div class="map-interactive-panel">
-                        <span class="mono-label">EXPLORADOR REGIONAL // SELECCIONA UNA ZONA</span>
+                        <span class="mono-label">EXPLORADOR REGIONAL INTERACTIVO // 14 REGIONES</span>
                         <div class="map-region-buttons" id="map-region-buttons"></div>
                         <div class="map-region-detail" id="map-region-detail"></div>
                     </div>
@@ -341,7 +633,7 @@
                 <div class="vs-grid reveal">
                     <article class="glass-panel vs-card">
                         <div class="vs-media">
-                            <img src="assets/images/silksong/hk-screen-1.jpg" alt="Captura oficial de Hollow Knight" loading="lazy" class="vs-img zoomable-img" data-zoom-src="assets/images/silksong/hk-screen-1.jpg" data-zoom-caption="Hollow Knight — Hallownest" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
+                            <img src="assets/images/silksong/hk-header.jpg" alt="Portada oficial de Hollow Knight (Team Cherry)" loading="lazy" class="vs-img zoomable-img" data-zoom-src="assets/images/silksong/hk-header.jpg" data-zoom-caption="Hollow Knight — Portada oficial de Team Cherry" onerror="this.onerror=null;this.src='assets/images/fallback.svg'">
                             <span class="mono-tag">HOLLOW KNIGHT (2017)</span>
                         </div>
                         <div class="vs-body">
@@ -572,6 +864,22 @@
         </div>
     </div>
 
+    <!-- Modal Pergamino del Diario del Cazador -->
+    <div class="modal-backdrop" id="bestiary-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bm-title">
+        <div class="journal-modal-window">
+            <button class="modal-close journal-modal-close" id="bestiary-modal-close" aria-label="Cerrar ficha del Diario">✕</button>
+            <div class="journal-modal-body" id="bestiary-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Modal Dossier de Personaje -->
+    <div class="modal-backdrop" id="character-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+        <div class="modal-window glass-panel">
+            <button class="modal-close" id="character-modal-close" aria-label="Cerrar ficha de personaje">✕</button>
+            <div class="modal-body" id="character-modal-body"></div>
+        </div>
+    </div>
+
     <!-- Lightbox Universal para Ampliar Imágenes -->
     <div class="lightbox-backdrop" id="image-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
         <button class="modal-close lightbox-close" id="lightbox-close" aria-label="Cerrar imagen ampliada">✕</button>
@@ -581,6 +889,10 @@
         </div>
     </div>
 
+    <script src="data/bestiary-data.js"></script>
+    <script src="data/bestiary-data-2.js"></script>
+    <script src="data/encyclopedia-data.js"></script>
+    <script src="data/encyclopedia-data-2.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

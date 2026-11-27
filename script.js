@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             date: '3 AGO 2017',
             name: 'Hidden Dreams',
             tag: 'ACTUALIZACIÓN GRATUITA // CONTENT PACK',
-            img: 'https://static.wikia.nocookie.net/hollowknight/images/9/9b/Screenshot_HK_White_Defender_01.png/revision/latest',
+            img: 'https://static.wikia.nocookie.net/hollowknight/images/c/ce/Hollow-Knight-Hidden-Dreams.jpg/revision/latest',
             desc: 'Primer Content Pack gratuito de Hollow Knight. Amplió el contenido del plano onírico con dos jefes muy queridos por la comunidad y una herramienta clave de viaje rápido.',
             bosses: ['Príncipe Gris Zote (Grey Prince Zote) — en los sueños de Bretta en Bocasucia', 'Defensor Blanco (White Defender) — versión onírica del Defensor del Estiércol'],
             characters: ['Bretta (nueva narrativa en su casa tras rescatar a Zote)', 'Ogrim en su memoria gloriosa como uno de los Cinco Grandes Caballeros'],
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             date: '26 OCT 2017',
             name: 'The Grimm Troupe',
             tag: 'ACTUALIZACIÓN GRATUITA // CONTENT PACK',
-            img: 'https://static.wikia.nocookie.net/hollowknight/images/3/37/Grimm_Troupe-0.png/revision/latest',
+            img: 'https://static.wikia.nocookie.net/hollowknight/images/4/4f/TheGrimmTroupeCoverArt.jpg/revision/latest',
             desc: 'Segundo Content Pack gratuito. Al encender una linterna pesadillesca en Acantilados Aulladores, la Compañía de Grimm instala su carpa circense en Bocasucia e inicia el Ritual de la Llama.',
             bosses: ['Maestro de la Compañía Grimm (Troupe Master Grimm)', 'Rey Pesadilla Grimm (Nightmare King Grimm)'],
             characters: ['Grimm', 'Brumm (músico de la compañía)', 'Divine (mejora amuletos frágiles a inquebrantables)', 'Nymm (si destierras a la Compañía)'],
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             date: '23 AGO 2018',
             name: 'Godmaster',
             tag: 'ACTUALIZACIÓN GRATUITA // CONTENT PACK FINAL',
-            img: 'https://static.wikia.nocookie.net/hollowknight/images/b/ba/Screenshot_HK_Godhome_01.png/revision/latest',
+            img: 'https://static.wikia.nocookie.net/hollowknight/images/1/1c/GodmasterCoverArt.png/revision/latest',
             desc: 'Cuarto y último Content Pack gratuito, el más grande de todos. Introduce el Hogar de los Dioses, un reino onírico dedicado a la máxima prueba de combate contra todos los jefes de Hallownest.',
             bosses: ['Hermanos Oro y Mato', 'Maestro Pintor Sheo', 'Gran Sabio del Aguijón Sly', 'Hermanas de Batalla (Sisters of Battle)', 'Nosk Alado (Winged Nosk)', 'Vasija Pura (Pure Vessel)', 'Resplandor Absoluto (Absolute Radiance)'],
             characters: ['Buscadora de Dioses (Godseeker) — encontrada en la Fosa de Basura de los Canales Reales'],
@@ -264,6 +264,20 @@ document.addEventListener('DOMContentLoaded', () => {
             visualFeatures: 'Lápidas talladas, estatuas monumentales de los Soñadores, luz cálida sepulcral y partículas doradas de Esencia.',
             techNote: 'Obtención del Aguijón Onírico, recompensas de Esencia de la Vidente, el Claro de los Espíritus, la Doliente Gris (Flor Delicada) y el Lago Azul.',
             entities: 'La Vidente (Seer), Xero (Guerrero Onírico), Doliente Gris (Ze’mer), Revek y los espíritus del Claro.'
+        },
+        {
+            id: 'royal-waterways',
+            category: 'ruinas-agua',
+            categoryLabel: 'BIOMA // ACUEDUCTOS SUBTERRÁNEOS',
+            title: 'Canales Reales (Royal Waterways)',
+            img: 'https://static.wikia.nocookie.net/hollowknight/images/9/90/Screenshot_HK_Royal_Waterways_01.png/revision/latest',
+            palette: '#112233 · #2E5A7A · #7FB3D5',
+            gradient: 'linear-gradient(135deg, #09131d 0%, #1c3f5a 65%, #4a89a8 100%)',
+            sigil: '💧',
+            summary: 'Red laberíntica de tuberías, compuertas y conductos inundados bajo la Ciudad de Lágrimas donde desembocan las aguas del reino.',
+            visualFeatures: 'Bóvedas húmedas en tonos azul verdoso y turquesa oscuro, corrientes de agua perpetuas, cañerías corroídas y bruma subterránea.',
+            techNote: 'Arboleda de Isma (Lágrima de Isma), Fosa de Basura (acceso al Hogar de los Dioses / Godhome), cámara de Flukemarm (Nido de Trematodos), guarida de Tuk y paso hacia Cuenca Antigua.',
+            entities: 'Defensor del Estiércol (Ogrim), Defensor Blanco, Flukemarm, Buscadora de Dioses, Ermitaño Trematodo, Tuk, Trematodos (Flukefey, Flukemon, Flukemunga), Hwurmp, Pilflip y Belfly.'
         },
 
         // SUBTERRÁNEO, CRISTAL Y ABISMO
@@ -1262,9 +1276,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SECCIÓN 05: JEFES Y ENEMIGOS
+    // SECCIÓN 05: JEFES Y ENEMIGOS (CON REFERENCIA CRUZADA AL DIARIO DEL CAZADOR)
     const bossesGrid = document.getElementById('bosses-grid');
     const bossFilterBtns = document.querySelectorAll('.boss-filter-btn');
+    const bestiaryList = Array.isArray(window.HK_BESTIARY_DATA) ? window.HK_BESTIARY_DATA : [];
+    const encyclopediaData = window.HK_ENCYCLOPEDIA_DATA || {};
+
+    function findBestiaryForBoss(bossName) {
+        return bestiaryList.find(item => item.bossRef && item.bossRef === bossName) || null;
+    }
 
     function renderBosses(category = 'all') {
         if (!bossesGrid) return;
@@ -1272,7 +1292,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ? bossesEnemiesData
             : bossesEnemiesData.filter(b => b.category === category);
 
-        bossesGrid.innerHTML = list.map((b, idx) => `
+        bossesGrid.innerHTML = list.map((b, idx) => {
+            const linkedEntry = findBestiaryForBoss(b.name);
+            return `
             <article class="glass-card boss-card" id="boss-${idx}">
                 <div class="boss-img-wrap">
                     ${imgTag(b.img, b.name, 'boss-img zoomable-img', true)}
@@ -1287,9 +1309,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         <li><span>Ataques:</span> ${b.attacks}</li>
                         <li><span>Recompensa:</span> ${b.rewards}</li>
                     </ul>
+                    ${linkedEntry ? `
+                        <div class="boss-crossref-row">
+                            <button type="button" class="crossref-pill open-bestiary-ref" data-bestiary-id="${linkedEntry.id}">
+                                📖 Ver ficha en Diario del Cazador (#${String(linkedEntry.order).padStart(3, '0')})
+                            </button>
+                        </div>
+                    ` : ''}
                 </div>
             </article>
-        `).join('');
+            `;
+        }).join('');
     }
 
     bossFilterBtns.forEach(btn => {
@@ -1384,50 +1414,100 @@ document.addEventListener('DOMContentLoaded', () => {
     if (charmNotchFilter) charmNotchFilter.addEventListener('change', () => renderArsenal('amuletos'));
     if (charmLocalSearch) charmLocalSearch.addEventListener('input', () => renderArsenal('amuletos'));
 
-    // SECCIÓN 07: CARTOGRAFÍA INTERACTIVA DE HALLOWNEST
+    // SECCIÓN 07: CARTOGRAFÍA INTERACTIVA DE HALLOWNEST (AMPLIADA CON MARCADORES Y CONEXIONES)
     const mapRegionButtons = document.getElementById('map-region-buttons');
     const mapRegionDetail = document.getElementById('map-region-detail');
+    const mapPinsLayer = document.getElementById('map-pins-layer');
+    const mapPinsToggle = document.getElementById('map-pins-toggle');
+    const activeMapRegions = (encyclopediaData.expandedMapRegions && encyclopediaData.expandedMapRegions.length)
+        ? encyclopediaData.expandedMapRegions
+        : mapRegionsData;
+
+    function selectMapRegionByIndex(idx) {
+        const r = activeMapRegions[idx];
+        if (!r || !mapRegionDetail) return;
+
+        if (mapRegionButtons) {
+            mapRegionButtons.querySelectorAll('.map-region-btn').forEach(b => {
+                b.classList.toggle('active', Number(b.dataset.regionIdx) === idx);
+            });
+        }
+        if (mapPinsLayer) {
+            mapPinsLayer.querySelectorAll('.map-pin').forEach(p => {
+                p.classList.toggle('active', Number(p.dataset.regionIdx) === idx);
+            });
+        }
+
+        const creaturesHtml = Array.isArray(r.creatures) && r.creatures.length
+            ? `<div class="map-creature-chips">${r.creatures.map(c =>
+                `<button type="button" class="crossref-pill open-bestiary-ref" data-bestiary-id="${c.id}">📖 ${c.label}</button>`
+            ).join('')}</div>`
+            : '';
+
+        mapRegionDetail.innerHTML = `
+            <span class="mono-tag">${r.zone}</span>
+            <h3>${r.name}</h3>
+            <div class="map-detail-grid">
+                <div>
+                    <span class="mono-label">CONEXIONES DIRECTAS</span>
+                    <p>${r.connections}</p>
+                </div>
+                ${r.characters ? `<div><span class="mono-label">PERSONAJES PRESENTES</span><p>${r.characters}</p></div>` : ''}
+                ${creaturesHtml ? `<div><span class="mono-label">ENEMIGOS Y JEFES (ABRIR EN DIARIO DEL CAZADOR)</span>${creaturesHtml}</div>` : ''}
+                ${r.collectibles ? `<div><span class="mono-label">COLECCIONABLES Y MEJORAS</span><p>${r.collectibles}</p></div>` : ''}
+                <div>
+                    <span class="mono-label">UBICACIONES IMPORTANTES</span>
+                    <p>${r.pois}</p>
+                </div>
+                <div>
+                    <span class="mono-label">CIERVOS, TRANVÍAS Y ASCENSORES</span>
+                    <p>${r.transport}</p>
+                </div>
+                ${r.secrets ? `<div><span class="mono-label">SECRETOS Y ZONAS ESPECIALES</span><p>${r.secrets}</p></div>` : ''}
+            </div>
+        `;
+    }
 
     function renderMapRegions() {
         if (!mapRegionButtons || !mapRegionDetail) return;
-        mapRegionButtons.innerHTML = mapRegionsData.map((r, i) => `
+
+        mapRegionButtons.innerHTML = activeMapRegions.map((r, i) => `
             <button type="button" class="filter-btn map-region-btn ${i === 0 ? 'active' : ''}" data-region-idx="${i}">
-                ${r.name}
+                ${r.short || r.name}
             </button>
         `).join('');
 
-        function showRegion(idx) {
-            const r = mapRegionsData[idx];
-            if (!r) return;
-            mapRegionDetail.innerHTML = `
-                <span class="mono-tag">${r.zone}</span>
-                <h3>${r.name}</h3>
-                <div class="map-detail-grid">
-                    <div>
-                        <span class="mono-label">CONEXIONES DIRECTAS</span>
-                        <p>${r.connections}</p>
-                    </div>
-                    <div>
-                        <span class="mono-label">PUNTOS DE INTERÉS E HISTORIA</span>
-                        <p>${r.pois}</p>
-                    </div>
-                    <div>
-                        <span class="mono-label">TRANSPORTE Y ACCESOS</span>
-                        <p>${r.transport}</p>
-                    </div>
-                </div>
-            `;
+        if (mapPinsLayer) {
+            mapPinsLayer.innerHTML = activeMapRegions.map((r, i) => (
+                typeof r.x === 'number' && typeof r.y === 'number'
+                    ? `<button type="button" class="map-pin ${i === 0 ? 'active' : ''}" style="left:${r.x}%;top:${r.y}%;" data-region-idx="${i}" aria-label="Seleccionar ${escapeAttr(r.name)}"><span class="map-pin-tooltip">${r.short || r.name}</span></button>`
+                    : ''
+            )).join('');
+
+            mapPinsLayer.querySelectorAll('.map-pin').forEach(pin => {
+                pin.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    selectMapRegionByIndex(Number(pin.dataset.regionIdx));
+                });
+            });
+        }
+
+        if (mapPinsToggle && mapPinsLayer) {
+            mapPinsToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const hidden = mapPinsLayer.classList.toggle('pins-hidden');
+                mapPinsToggle.setAttribute('aria-pressed', String(!hidden));
+                mapPinsToggle.textContent = hidden ? '📍 Mostrar marcadores' : '📍 Ocultar marcadores';
+            });
         }
 
         mapRegionButtons.querySelectorAll('.map-region-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                mapRegionButtons.querySelectorAll('.map-region-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                showRegion(Number(btn.dataset.regionIdx));
+                selectMapRegionByIndex(Number(btn.dataset.regionIdx));
             });
         });
 
-        showRegion(0);
+        selectMapRegionByIndex(0);
     }
 
     // SECCIÓN 08: BANDA SONORA Y DISEÑO SONORO
@@ -1462,6 +1542,778 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
+    // 7B. NUEVAS SECCIONES DE ENCICLOPEDIA Y DIARIO DEL CAZADOR AL 100 %
+    // =========================================================================
+    const bestiaryModal = document.getElementById('bestiary-modal');
+    const bestiaryModalBody = document.getElementById('bestiary-modal-body');
+    const bestiaryModalClose = document.getElementById('bestiary-modal-close');
+    const characterModal = document.getElementById('character-modal');
+    const characterModalBody = document.getElementById('character-modal-body');
+    const characterModalClose = document.getElementById('character-modal-close');
+
+    function anyModalOpen() {
+        return Boolean(
+            (lightbox && lightbox.classList.contains('open')) ||
+            (modal && modal.classList.contains('open')) ||
+            (bestiaryModal && bestiaryModal.classList.contains('open')) ||
+            (characterModal && characterModal.classList.contains('open'))
+        );
+    }
+
+    function syncBodyOverflow() {
+        document.body.style.overflow = anyModalOpen() ? 'hidden' : '';
+    }
+
+    // --- A) DIARIO DEL CAZADOR (168 ENTRADAS, 100% VISIBLES DESDE EL INICIO) ---
+    const BESTIARY_FAV_KEY = 'hk_archive_bestiary_favs_v1';
+    let bestiaryFavs = new Set();
+    try {
+        const savedFavs = JSON.parse(localStorage.getItem(BESTIARY_FAV_KEY) || '[]');
+        if (Array.isArray(savedFavs)) bestiaryFavs = new Set(savedFavs);
+    } catch (_) { /* noop */ }
+
+    function saveBestiaryFavs() {
+        try { localStorage.setItem(BESTIARY_FAV_KEY, JSON.stringify([...bestiaryFavs])); } catch (_) { /* noop */ }
+        const favCountEl = document.getElementById('bestiary-fav-count');
+        if (favCountEl) favCountEl.textContent = String(bestiaryFavs.size);
+    }
+
+    const CATEGORY_LABELS_MAP = {
+        'comun': 'Enemigo Común',
+        'especial': 'Enemigo Especial',
+        'variante': 'Variante',
+        'jefe-principal': 'Jefe Principal',
+        'jefe-opcional': 'Jefe Opcional',
+        'jefe-onirico': 'Jefe Onírico',
+        'guerrero-onirico': 'Guerrero Onírico',
+        'panteon': 'Jefe de Panteón',
+        'registro-especial': 'Registro Especial'
+    };
+
+    const EXPANSION_LABELS_MAP = {
+        'base': 'Juego Base',
+        'hidden-dreams': 'Hidden Dreams',
+        'grimm-troupe': 'The Grimm Troupe',
+        'lifeblood': 'Lifeblood',
+        'godmaster': 'Godmaster'
+    };
+
+    const MOVEMENT_LABELS_MAP = {
+        'terrestre': 'Terrestre',
+        'volador': 'Volador',
+        'acuatico': 'Acuático / Ácido',
+        'registro': 'Registro No Viviente'
+    };
+
+    function openBestiaryModal(entryOrId) {
+        const item = typeof entryOrId === 'string'
+            ? bestiaryList.find(b => b.id === entryOrId)
+            : entryOrId;
+        if (!item || !bestiaryModal || !bestiaryModalBody) return;
+
+        const isFav = bestiaryFavs.has(item.id);
+        const catLabel = CATEGORY_LABELS_MAP[item.category] || item.category;
+        const expLabel = EXPANSION_LABELS_MAP[item.expansion] || item.expansion;
+        const movLabel = MOVEMENT_LABELS_MAP[item.movement] || '';
+        const regionsText = Array.isArray(item.regions) && item.regions.length ? item.regions.join(' · ') : item.region;
+        const killsText = typeof item.killsRequired === 'number'
+            ? (item.killsRequired === 0 ? '0 (Desbloqueado al recibir el Diario)' : `${item.killsRequired} ${item.killsRequired === 1 ? 'derrota' : 'derrotas'}`)
+            : String(item.killsRequired || 'No aplica');
+
+        bestiaryModalBody.innerHTML = `
+            <div class="jm-header">
+                <div class="jm-portrait-frame">
+                    ${imgTag(item.img, `${item.nameEs} (${item.nameEn})`, 'zoomable-img', true)}
+                </div>
+                <div class="jm-title-area">
+                    <span class="j-pill ${item.isSpecialRecord ? 'special' : ''}">#${String(item.order).padStart(3, '0')} · ${catLabel}</span>
+                    <span class="j-pill">${expLabel}</span>
+                    ${item.requiredForMark ? '<span class="j-pill">Requerida para Marca</span>' : '<span class="j-pill">Entrada Opcional / Especial</span>'}
+                    <h3 id="bm-title">${item.nameEs}</h3>
+                    <div class="jm-en-sub">${item.nameEn}${movLabel ? ` — ${movLabel}` : ''}</div>
+                    <div class="jm-meta-grid">
+                        <div class="jm-meta-box"><span>Región / Bioma</span><strong>${item.region}</strong></div>
+                        <div class="jm-meta-box"><span>Registro Completo</span><strong>${killsText}</strong></div>
+                        ${!item.isSpecialRecord && item.hp ? `<div class="jm-meta-box"><span>Salud Verificada</span><strong>${item.hp}</strong></div>` : ''}
+                        ${!item.isSpecialRecord && item.geo ? `<div class="jm-meta-box"><span>Geo / Recompensa</span><strong>${item.geo}</strong></div>` : ''}
+                    </div>
+                </div>
+            </div>
+
+            <div class="jm-hunter-quote">
+                <div class="jm-q-entry">“${item.hunterDesc}”</div>
+                ${item.hunterNote ? `<div class="jm-q-note">Nota del Diario: “${item.hunterNote}”</div>` : ''}
+            </div>
+
+            <div class="jm-details-list">
+                <div class="jm-detail-block">
+                    <h4>Descripción y Hábitat</h4>
+                    <p>${item.description} <strong>Ubicaciones:</strong> ${regionsText}.</p>
+                </div>
+                ${item.behavior ? `
+                    <div class="jm-detail-block">
+                        <h4>Comportamiento</h4>
+                        <p>${item.behavior}</p>
+                    </div>
+                ` : ''}
+                ${item.specialTraits ? `
+                    <div class="jm-detail-block">
+                        <h4>Características Especiales</h4>
+                        <p>${item.specialTraits}</p>
+                    </div>
+                ` : ''}
+                ${item.attacks ? `
+                    <div class="jm-detail-block">
+                        <h4>Ataques y Peligros</h4>
+                        <p>${item.attacks}</p>
+                    </div>
+                ` : ''}
+                ${item.strategy ? `
+                    <div class="jm-detail-block">
+                        <h4>Estrategia Recomendada</h4>
+                        <p>${item.strategy}</p>
+                    </div>
+                ` : ''}
+            </div>
+
+            <div class="jm-actions">
+                <button type="button" class="jm-btn" id="jm-toggle-fav" data-id="${item.id}">
+                    ${isFav ? '★ Guardada en Favoritas' : '☆ Marcar como Favorita (Opcional)'}
+                </button>
+                ${item.bossRef ? `
+                    <button type="button" class="jm-btn" id="jm-jump-boss" data-boss-name="${escapeAttr(item.bossRef)}">
+                        ⚔ Ver ficha en Jefes y Enemigos →
+                    </button>
+                ` : ''}
+            </div>
+        `;
+
+        const favBtn = document.getElementById('jm-toggle-fav');
+        if (favBtn) {
+            favBtn.addEventListener('click', () => {
+                if (bestiaryFavs.has(item.id)) bestiaryFavs.delete(item.id);
+                else bestiaryFavs.add(item.id);
+                saveBestiaryFavs();
+                favBtn.textContent = bestiaryFavs.has(item.id)
+                    ? '★ Guardada en Favoritas'
+                    : '☆ Marcar como Favorita (Opcional)';
+                renderBestiary();
+            });
+        }
+
+        const bossJumpBtn = document.getElementById('jm-jump-boss');
+        if (bossJumpBtn) {
+            bossJumpBtn.addEventListener('click', () => {
+                closeBestiaryModal();
+                bossFilterBtns.forEach(b => b.classList.toggle('active', b.dataset.cat === 'all'));
+                renderBosses('all');
+                const targetBossIdx = bossesEnemiesData.findIndex(b => b.name === item.bossRef);
+                const targetEl = targetBossIdx >= 0 ? document.getElementById(`boss-${targetBossIdx}`) : document.getElementById('jefes');
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetEl.classList.add('search-highlight');
+                    setTimeout(() => targetEl.classList.remove('search-highlight'), 1800);
+                }
+            });
+        }
+
+        bestiaryModal.classList.add('open');
+        bestiaryModal.setAttribute('aria-hidden', 'false');
+        syncBodyOverflow();
+    }
+
+    function closeBestiaryModal() {
+        if (!bestiaryModal) return;
+        bestiaryModal.classList.remove('open');
+        bestiaryModal.setAttribute('aria-hidden', 'true');
+        syncBodyOverflow();
+    }
+
+    if (bestiaryModalClose) bestiaryModalClose.addEventListener('click', closeBestiaryModal);
+    if (bestiaryModal) {
+        bestiaryModal.addEventListener('click', (e) => {
+            if (e.target === bestiaryModal) closeBestiaryModal();
+        });
+    }
+
+    const bestiaryGrid = document.getElementById('bestiary-grid');
+    const bestiarySearch = document.getElementById('bestiary-search');
+    const bestiaryCategory = document.getElementById('bestiary-category');
+    const bestiaryRegion = document.getElementById('bestiary-region');
+    const bestiaryExpansion = document.getElementById('bestiary-expansion');
+    const bestiarySort = document.getElementById('bestiary-sort');
+    const bestiaryCounter = document.getElementById('bestiary-counter');
+    const bestiaryReset = document.getElementById('bestiary-reset');
+
+    function populateBestiaryRegions() {
+        if (!bestiaryRegion) return;
+        const regionsSet = new Set();
+        bestiaryList.forEach(item => {
+            if (item.region) regionsSet.add(item.region);
+        });
+        [...regionsSet].sort((a, b) => a.localeCompare(b, 'es')).forEach(reg => {
+            const opt = document.createElement('option');
+            opt.value = reg;
+            opt.textContent = reg;
+            bestiaryRegion.appendChild(opt);
+        });
+    }
+
+    function renderBestiary() {
+        if (!bestiaryGrid) return;
+        const q = bestiarySearch ? bestiarySearch.value.trim().toLowerCase() : '';
+        const cat = bestiaryCategory ? bestiaryCategory.value : 'all';
+        const reg = bestiaryRegion ? bestiaryRegion.value : 'all';
+        const exp = bestiaryExpansion ? bestiaryExpansion.value : 'all';
+        const sort = bestiarySort ? bestiarySort.value : 'journal';
+
+        let filtered = bestiaryList.filter(item => {
+            const matchQ = !q ||
+                item.nameEs.toLowerCase().includes(q) ||
+                item.nameEn.toLowerCase().includes(q) ||
+                item.region.toLowerCase().includes(q) ||
+                item.description.toLowerCase().includes(q);
+            const matchCat = cat === 'all' ||
+                item.category === cat ||
+                (['volador', 'terrestre', 'acuatico'].includes(cat) && item.movement === cat);
+            const matchReg = reg === 'all' ||
+                item.region === reg ||
+                (Array.isArray(item.regions) && item.regions.some(r => r.includes(reg)));
+            const matchExp = exp === 'all' || item.expansion === exp;
+            const matchFav = sort !== 'favorites' || bestiaryFavs.has(item.id);
+            return matchQ && matchCat && matchReg && matchExp && matchFav;
+        });
+
+        if (sort === 'az') {
+            filtered = [...filtered].sort((a, b) => a.nameEs.localeCompare(b.nameEs, 'es'));
+        } else if (sort === 'za') {
+            filtered = [...filtered].sort((a, b) => b.nameEs.localeCompare(a.nameEs, 'es'));
+        } else {
+            filtered = [...filtered].sort((a, b) => a.order - b.order);
+        }
+
+        if (bestiaryCounter) {
+            bestiaryCounter.textContent = `Mostrando ${filtered.length} de ${bestiaryList.length} entradas del Diario del Cazador`;
+        }
+
+        if (!filtered.length) {
+            bestiaryGrid.innerHTML = '<div class="bestiary-empty">Ninguna entrada coincide con esos filtros. Pulsa <strong>“Mostrar todas las criaturas”</strong> para regresar al catálogo completo.</div>';
+            return;
+        }
+
+        const isBossCat = (c) => ['jefe-principal', 'jefe-opcional', 'jefe-onirico', 'guerrero-onirico', 'panteon'].includes(c);
+
+        bestiaryGrid.innerHTML = filtered.map(item => {
+            const fav = bestiaryFavs.has(item.id);
+            const catLabel = CATEGORY_LABELS_MAP[item.category] || item.category;
+            return `
+            <article class="bestiary-card ${item.isSpecialRecord ? 'is-special-record' : ''}" data-bestiary-id="${item.id}" tabindex="0" role="button" aria-label="Abrir ficha de ${escapeAttr(item.nameEs)}">
+                <div class="bestiary-card-top">
+                    <span class="bestiary-num">#${String(item.order).padStart(3, '0')}</span>
+                    <button type="button" class="bestiary-fav-btn ${fav ? 'active' : ''}" data-fav-id="${item.id}" aria-label="${fav ? 'Quitar de favoritas' : 'Marcar como favorita'}" title="Favorita (opcional)">${fav ? '★' : '☆'}</button>
+                </div>
+                <div class="bestiary-thumb-wrap">
+                    ${imgTag(item.img, `${item.nameEs} (${item.nameEn})`, 'bestiary-thumb')}
+                </div>
+                <h3>${item.nameEs}</h3>
+                <span class="bestiary-en">${item.nameEn}</span>
+                <div class="bestiary-tags">
+                    <span class="j-pill ${item.isSpecialRecord ? 'special' : (isBossCat(item.category) ? 'boss' : '')}">${catLabel}</span>
+                    <span class="j-pill">${item.region}</span>
+                </div>
+            </article>
+            `;
+        }).join('');
+    }
+
+    function initBestiary() {
+        populateBestiaryRegions();
+        saveBestiaryFavs();
+        renderBestiary();
+
+        [bestiarySearch, bestiaryCategory, bestiaryRegion, bestiaryExpansion, bestiarySort].forEach(ctrl => {
+            if (!ctrl) return;
+            const evt = ctrl.tagName === 'INPUT' ? 'input' : 'change';
+            ctrl.addEventListener(evt, renderBestiary);
+        });
+
+        if (bestiaryReset) {
+            bestiaryReset.addEventListener('click', () => {
+                if (bestiarySearch) bestiarySearch.value = '';
+                if (bestiaryCategory) bestiaryCategory.value = 'all';
+                if (bestiaryRegion) bestiaryRegion.value = 'all';
+                if (bestiaryExpansion) bestiaryExpansion.value = 'all';
+                if (bestiarySort) bestiarySort.value = 'journal';
+                renderBestiary();
+            });
+        }
+
+        if (bestiaryGrid) {
+            bestiaryGrid.addEventListener('click', (e) => {
+                const favBtn = e.target.closest('.bestiary-fav-btn');
+                if (favBtn) {
+                    e.stopPropagation();
+                    const id = favBtn.dataset.favId;
+                    if (bestiaryFavs.has(id)) bestiaryFavs.delete(id);
+                    else bestiaryFavs.add(id);
+                    saveBestiaryFavs();
+                    renderBestiary();
+                    return;
+                }
+                const card = e.target.closest('.bestiary-card');
+                if (card) openBestiaryModal(card.dataset.bestiaryId);
+            });
+
+            bestiaryGrid.addEventListener('keydown', (e) => {
+                const card = e.target.closest('.bestiary-card');
+                if (card && (e.key === 'Enter' || e.key === ' ') && !e.target.closest('.bestiary-fav-btn')) {
+                    e.preventDefault();
+                    openBestiaryModal(card.dataset.bestiaryId);
+                }
+            });
+        }
+    }
+
+    // --- B) ENCICLOPEDIA COMPLETA DE PERSONAJES (COMPLEMENTO A LOS 11 ORIGINALES) ---
+    const extChars = encyclopediaData.extendedCharacters || [];
+    const extCharsGrid = document.getElementById('extended-characters-grid');
+    const npcFilterBtns = document.querySelectorAll('.npc-filter-btn');
+    const npcLocalSearch = document.getElementById('npc-local-search');
+    const npcCountBadge = document.getElementById('npc-count-badge');
+    let currentNpcCat = 'all';
+
+    function openCharacterModal(charOrId) {
+        const ch = typeof charOrId === 'string'
+            ? extChars.find(c => c.id === charOrId)
+            : charOrId;
+        if (!ch || !characterModal || !characterModalBody) return;
+
+        characterModalBody.innerHTML = `
+            <div class="char-modal-hero">
+                ${imgTag(ch.img, ch.name, 'char-modal-avatar zoomable-img', true)}
+                <div>
+                    <span class="mono-tag">${ch.categoryLabel}</span>
+                    <h3 id="cm-title" style="margin-top:0.45rem;">${ch.name}</h3>
+                    <div class="mono-label" style="margin-top:0.2rem;">📍 ${ch.location}</div>
+                </div>
+            </div>
+            <div class="char-modal-grid">
+                <div class="char-modal-field"><span class="mono-label">HISTORIA</span><p>${ch.history}</p></div>
+                <div class="char-modal-field"><span class="mono-label">PERSONALIDAD</span><p>${ch.personality}</p></div>
+                <div class="char-modal-field"><span class="mono-label">FUNCIÓN EN EL JUEGO</span><p>${ch.function}</p></div>
+                <div class="char-modal-field"><span class="mono-label">RELACIONES CON OTROS PERSONAJES</span><p>${ch.relations}</p></div>
+                <div class="char-modal-field"><span class="mono-label">IMPORTANCIA PARA LA HISTORIA</span><p>${ch.importance}</p></div>
+            </div>
+            ${ch.dialogue ? `<div class="char-modal-quote">💬 ${ch.dialogue}</div>` : ''}
+            ${ch.bestiaryId ? `
+                <div style="margin-top:1.1rem;">
+                    <button type="button" class="crossref-pill open-bestiary-ref" data-bestiary-id="${ch.bestiaryId}">
+                        📖 También aparece en el Diario del Cazador — Abrir ficha de combate
+                    </button>
+                </div>
+            ` : ''}
+        `;
+
+        characterModal.classList.add('open');
+        characterModal.setAttribute('aria-hidden', 'false');
+        syncBodyOverflow();
+    }
+
+    function closeCharacterModal() {
+        if (!characterModal) return;
+        characterModal.classList.remove('open');
+        characterModal.setAttribute('aria-hidden', 'true');
+        syncBodyOverflow();
+    }
+
+    if (characterModalClose) characterModalClose.addEventListener('click', closeCharacterModal);
+    if (characterModal) {
+        characterModal.addEventListener('click', (e) => {
+            if (e.target === characterModal) closeCharacterModal();
+        });
+    }
+
+    function renderExtendedCharacters() {
+        if (!extCharsGrid) return;
+        const q = npcLocalSearch ? npcLocalSearch.value.trim().toLowerCase() : '';
+        const filtered = extChars.filter(c => {
+            const matchCat = currentNpcCat === 'all' || c.category === currentNpcCat;
+            const matchQ = !q ||
+                c.name.toLowerCase().includes(q) ||
+                c.location.toLowerCase().includes(q) ||
+                c.history.toLowerCase().includes(q) ||
+                c.function.toLowerCase().includes(q);
+            return matchCat && matchQ;
+        });
+
+        if (npcCountBadge) {
+            npcCountBadge.textContent = `${filtered.length} de ${extChars.length} personajes (+ 11 clave arriba)`;
+        }
+
+        if (!filtered.length) {
+            extCharsGrid.innerHTML = '<p class="empty-state">No se encontraron personajes con ese criterio.</p>';
+            return;
+        }
+
+        extCharsGrid.innerHTML = filtered.map(c => `
+            <article class="glass-card npc-card" id="npc-${c.id}" data-npc-id="${c.id}" tabindex="0" role="button" aria-label="Abrir dossier de ${escapeAttr(c.name)}">
+                <div class="npc-card-head">
+                    <div class="npc-avatar-wrap">${imgTag(c.img, c.name, 'npc-avatar')}</div>
+                    <div class="npc-card-title">
+                        <span class="mono-label">${c.categoryLabel}</span>
+                        <h4>${c.name}</h4>
+                        <div class="npc-card-loc">📍 ${c.location}</div>
+                    </div>
+                </div>
+                <p class="npc-card-summary">${c.history}</p>
+                <div class="npc-card-footer">
+                    <span class="art-inspect">VER DOSSIER COMPLETO →</span>
+                    ${c.bestiaryId ? `<button type="button" class="crossref-pill open-bestiary-ref" data-bestiary-id="${c.bestiaryId}">📖 Diario</button>` : ''}
+                </div>
+            </article>
+        `).join('');
+    }
+
+    npcFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            npcFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentNpcCat = btn.dataset.npcCat;
+            renderExtendedCharacters();
+        });
+    });
+    if (npcLocalSearch) npcLocalSearch.addEventListener('input', renderExtendedCharacters);
+    if (extCharsGrid) {
+        extCharsGrid.addEventListener('click', (e) => {
+            if (e.target.closest('.open-bestiary-ref')) return;
+            const card = e.target.closest('.npc-card');
+            if (card) openCharacterModal(card.dataset.npcId);
+        });
+        extCharsGrid.addEventListener('keydown', (e) => {
+            const card = e.target.closest('.npc-card');
+            if (card && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                openCharacterModal(card.dataset.npcId);
+            }
+        });
+    }
+
+    // --- C) COLECCIONABLES Y MISIONES SECUNDARIAS ---
+    const collectiblesList = encyclopediaData.collectiblesQuests || [];
+    const collectiblesGrid = document.getElementById('collectibles-grid');
+    const colFilterBtns = document.querySelectorAll('.col-filter-btn');
+
+    function renderCollectibles(cat = 'all') {
+        if (!collectiblesGrid) return;
+        const list = cat === 'all' ? collectiblesList : collectiblesList.filter(i => i.category === cat);
+        collectiblesGrid.innerHTML = list.map(item => `
+            <article class="glass-card collectible-card" id="${item.id}">
+                <div class="col-head">
+                    <div class="col-icon-wrap">${imgTag(item.img, item.name, 'zoomable-img', true)}</div>
+                    <div>
+                        <span class="mono-tag">${item.region}</span>
+                        <h3 style="margin-top:0.35rem;">${item.name}</h3>
+                    </div>
+                </div>
+                <p>${item.description}</p>
+                <ul class="col-meta-list">
+                    <li><strong>UBICACIÓN:</strong> ${item.location}</li>
+                    <li><strong>UTILIDAD:</strong> ${item.utility}</li>
+                    <li><strong>CÓMO CONSEGUIRLO:</strong> ${item.howToGet}</li>
+                    <li><strong>MISIÓN / RECOMPENSA:</strong> ${item.questLink}</li>
+                </ul>
+            </article>
+        `).join('');
+    }
+    colFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            colFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderCollectibles(btn.dataset.colCat);
+        });
+    });
+
+    // --- D) CIVILIZACIONES, TRIBUS Y CULTURAS ---
+    const civsList = encyclopediaData.civilizations || [];
+    function renderCivilizations() {
+        const grid = document.getElementById('civilizations-grid');
+        if (!grid) return;
+        grid.innerHTML = civsList.map(c => `
+            <article class="glass-card civ-card reveal" id="${c.id}">
+                <span class="mono-tag">${c.tag}</span>
+                <h3>${c.name}</h3>
+                <div class="civ-specs">
+                    <div><strong>Origen:</strong> ${c.origin}</div>
+                    <div><strong>Ubicación:</strong> ${c.location}</div>
+                    <div><strong>Organización:</strong> ${c.organization}</div>
+                    <div><strong>Costumbres:</strong> ${c.customs}</div>
+                    <div><strong>Relación con el Reino:</strong> ${c.relation}</div>
+                    <div><strong>Personajes Clave:</strong> ${c.characters}</div>
+                    <div><strong>Historia:</strong> ${c.history}</div>
+                    <div><strong>Situación Actual:</strong> ${c.present}</div>
+                </div>
+            </article>
+        `).join('');
+    }
+
+    // --- E) GUÍA VISUAL DE MECÁNICAS Y COMBATE ---
+    const mechanicsList = encyclopediaData.mechanicsGuide || [];
+    const mechanicsGrid = document.getElementById('mechanics-grid');
+    const mecFilterBtns = document.querySelectorAll('.mec-filter-btn');
+
+    function renderMechanics(phase = 'all') {
+        if (!mechanicsGrid) return;
+        const list = phase === 'all' ? mechanicsList : mechanicsList.filter(m => m.phase === phase);
+        mechanicsGrid.innerHTML = list.map(m => `
+            <article class="glass-card mec-card" id="${m.id}">
+                <div class="mec-head">
+                    <div class="mec-icon" aria-hidden="true">${m.icon}</div>
+                    <div>
+                        <span class="mono-tag ${m.phase === 'inicial' ? 'mec-badge-init' : 'mec-badge-unlock'}">${m.phaseLabel}</span>
+                        <h3 style="margin-top:0.35rem;">${m.title}</h3>
+                    </div>
+                </div>
+                <p>${m.summary}</p>
+                <ul class="mec-list">
+                    ${m.details.map(d => `<li>${d}</li>`).join('')}
+                </ul>
+                ${m.visualBar ? `
+                    <div class="nail-bars" aria-label="Progresión de daño del Aguijón">
+                        ${m.visualBar.map(b => `
+                            <div class="nail-bar-row">
+                                <span>${b.label}</span>
+                                <div class="nail-bar-track"><div class="nail-bar-fill" style="width:${Math.round((b.val / b.max) * 100)}%;"></div></div>
+                                <span>${b.val} DMG</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+                ${m.arsenalRef ? `
+                    <button type="button" class="mec-ref-btn" data-arsenal-tab="${m.arsenalRef.tab}">${m.arsenalRef.label}</button>
+                ` : ''}
+            </article>
+        `).join('');
+    }
+    mecFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            mecFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderMechanics(btn.dataset.mecPhase);
+        });
+    });
+
+    // --- F) FINALES, SECRETOS Y LORE PROFUNDO (BLOQUEO PREVIO DE SPOILERS) ---
+    function initEndingsAndLore() {
+        const gate = document.getElementById('endings-spoiler-gate');
+        const content = document.getElementById('endings-content');
+        const unlockBtn = document.getElementById('unlock-endings-btn');
+        const lockBtn = document.getElementById('lock-endings-btn');
+        const endingsGrid = document.getElementById('endings-grid');
+        const pillarsGrid = document.getElementById('lore-pillars-grid');
+        const data = encyclopediaData.endingsAndLore;
+        if (!data) return;
+
+        if (endingsGrid) {
+            endingsGrid.innerHTML = data.endings.map(e => `
+                <article class="glass-card ending-card" id="${e.id}">
+                    <span class="mono-tag">${e.tag}</span>
+                    <h3>${e.title}</h3>
+                    <div class="civ-specs">
+                        <div><strong>Requisitos:</strong> ${e.requirements}</div>
+                        <div><strong>Personajes involucrados:</strong> ${e.characters}</div>
+                        <div><strong>Acontecimientos:</strong> ${e.events}</div>
+                        <div><strong>Diferencia clave:</strong> ${e.differences}</div>
+                        <div><strong>Hecho vs Interpretación:</strong> ${e.interpretation}</div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        if (pillarsGrid) {
+            pillarsGrid.innerHTML = data.lorePillars.map(p => `
+                <article class="glass-card pillar-card">
+                    <h3>${p.title}</h3>
+                    <div class="pillar-block">
+                        <span class="mono-tag lore-badge-confirmed">✓ CONFIRMADO EN EL JUEGO</span>
+                        <p>${p.confirmed}</p>
+                    </div>
+                    <div class="pillar-block">
+                        <span class="mono-tag lore-badge-theory">? INTERPRETACIÓN / TEORÍA COMUNITARIA</span>
+                        <p>${p.theory}</p>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        if (unlockBtn && gate && content) {
+            unlockBtn.addEventListener('click', () => {
+                gate.hidden = true;
+                content.hidden = false;
+            });
+        }
+        if (lockBtn && gate && content) {
+            lockBtn.addEventListener('click', () => {
+                content.hidden = true;
+                gate.hidden = false;
+            });
+        }
+    }
+
+    // --- G) LOGROS Y DESAFÍOS (63 OFICIALES + SEGUIMIENTO MANUAL OPCIONAL) ---
+    const achievementsList = encyclopediaData.achievements || [];
+    const ACH_STORAGE_KEY = 'hk_archive_achievements_v1';
+    let completedAchievements = new Set();
+    try {
+        const savedAch = JSON.parse(localStorage.getItem(ACH_STORAGE_KEY) || '[]');
+        if (Array.isArray(savedAch)) completedAchievements = new Set(savedAch);
+    } catch (_) { /* noop */ }
+
+    const achievementsGrid = document.getElementById('achievements-grid');
+    const achFilterBtns = document.querySelectorAll('.ach-filter-btn');
+    const achProgressText = document.getElementById('ach-progress-text');
+    const achProgressFill = document.getElementById('ach-progress-fill');
+    const achResetBtn = document.getElementById('ach-reset-progress');
+    let currentAchCat = 'all';
+
+    function updateAchProgress() {
+        const total = achievementsList.length || 63;
+        const done = completedAchievements.size;
+        const pct = total ? Math.round((done / total) * 100) : 0;
+        if (achProgressText) achProgressText.textContent = `${done} / ${total} completados (${pct}%)`;
+        if (achProgressFill) achProgressFill.style.width = `${pct}%`;
+        try { localStorage.setItem(ACH_STORAGE_KEY, JSON.stringify([...completedAchievements])); } catch (_) { /* noop */ }
+    }
+
+    function renderAchievements(cat = currentAchCat) {
+        if (!achievementsGrid) return;
+        currentAchCat = cat;
+        const list = cat === 'all'
+            ? achievementsList
+            : achievementsList.filter(a => (cat === 'finales' ? (a.cat === 'finales' || a.cat === 'especiales') : a.cat === cat));
+
+        achievementsGrid.innerHTML = list.map(a => {
+            const done = completedAchievements.has(a.id);
+            return `
+            <article class="glass-card ach-card ${done ? 'completed' : ''}" id="ach-${a.id}">
+                <div class="ach-top">
+                    ${imgTag(a.img, `Logro ${a.name} (${a.en})`, 'ach-icon')}
+                    <div class="ach-title-col">
+                        <h4>${a.name}</h4>
+                        <span class="charm-en">${a.en}</span>
+                    </div>
+                    <button type="button" class="ach-check-btn" data-ach-id="${a.id}" aria-pressed="${done}" title="Marcar logro como conseguido">${done ? '✓' : '○'}</button>
+                </div>
+                <div class="ach-badges">
+                    <span class="mono-tag">${a.catLabel}</span>
+                    ${a.spoiler ? '<span class="mono-tag vs-tag-orange">⚠ Spoiler</span>' : ''}
+                </div>
+                <p>${a.desc}</p>
+                <div class="ach-req"><strong>Requisitos:</strong> ${a.req}</div>
+            </article>
+            `;
+        }).join('');
+    }
+
+    function initAchievements() {
+        updateAchProgress();
+        renderAchievements('all');
+
+        achFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                achFilterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderAchievements(btn.dataset.achCat);
+            });
+        });
+
+        if (achievementsGrid) {
+            achievementsGrid.addEventListener('click', (e) => {
+                const btn = e.target.closest('.ach-check-btn');
+                if (!btn) return;
+                const id = btn.dataset.achId;
+                if (completedAchievements.has(id)) completedAchievements.delete(id);
+                else completedAchievements.add(id);
+                updateAchProgress();
+                renderAchievements(currentAchCat);
+            });
+        }
+
+        if (achResetBtn) {
+            achResetBtn.addEventListener('click', () => {
+                completedAchievements.clear();
+                updateAchProgress();
+                renderAchievements(currentAchCat);
+            });
+        }
+    }
+
+    // --- H) CRONOLOGÍA INTERACTIVA DE HALLOWNEST ---
+    const timelineList = encyclopediaData.timeline || [];
+    function renderChronology() {
+        const track = document.getElementById('chronology-track');
+        if (!track) return;
+        track.innerHTML = timelineList.map((t, i) => `
+            <article class="glass-card chrono-node ${t.status} reveal" id="era-${i}">
+                <span class="chrono-dot" aria-hidden="true"></span>
+                <div class="chrono-head">
+                    <span class="mono-label">${t.era}</span>
+                    <span class="mono-tag ${t.status === 'confirmado' ? 'lore-badge-confirmed' : 'lore-badge-theory'}">${t.statusLabel}</span>
+                </div>
+                <h3>${t.title}</h3>
+                <p>${t.summary}</p>
+                <button type="button" class="chrono-toggle" aria-expanded="false">Ver detalles históricos ▾</button>
+                <p class="chrono-extra" hidden>${t.details}</p>
+            </article>
+        `).join('');
+
+        track.addEventListener('click', (e) => {
+            const btn = e.target.closest('.chrono-toggle');
+            if (!btn) return;
+            const node = btn.closest('.chrono-node');
+            const extra = node ? node.querySelector('.chrono-extra') : null;
+            if (!extra) return;
+            const isHidden = extra.hasAttribute('hidden');
+            if (isHidden) {
+                extra.removeAttribute('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+                btn.textContent = 'Ocultar detalles ▴';
+            } else {
+                extra.setAttribute('hidden', '');
+                btn.setAttribute('aria-expanded', 'false');
+                btn.textContent = 'Ver detalles históricos ▾';
+            }
+        });
+    }
+
+    // --- I) SECRETOS, CURIOSIDADES Y EASTER EGGS ---
+    const secretsList = encyclopediaData.secrets || [];
+    const secretsGrid = document.getElementById('secrets-grid');
+    const secFilterBtns = document.querySelectorAll('.sec-filter-btn');
+
+    function renderSecrets(theme = 'all') {
+        if (!secretsGrid) return;
+        const list = theme === 'all'
+            ? secretsList
+            : secretsList.filter(s => (theme === 'desarrollo' ? (s.theme === 'desarrollo' || s.theme === 'silksong') : s.theme === theme));
+        secretsGrid.innerHTML = list.map(s => `
+            <article class="glass-card secret-card" id="${s.id}">
+                <div class="card-meta">📍 ${s.region}</div>
+                <span class="mono-tag" style="align-self:flex-start;">${s.themeLabel}</span>
+                <h3>${s.title}</h3>
+                <p>${s.desc}</p>
+                <div class="secret-how"><strong>Cómo encontrarlo / Dato verificado:</strong> ${s.howToFind}</div>
+            </article>
+        `).join('');
+    }
+    secFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            secFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderSecrets(btn.dataset.secTheme);
+        });
+    });
+
+    // =========================================================================
     // 8. LIGHTBOX UNIVERSAL PARA AMPLIAR IMÁGENES
     // =========================================================================
     const lightbox = document.getElementById('image-lightbox');
@@ -1477,19 +2329,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lightboxCaption) lightboxCaption.textContent = caption || '';
         lightbox.classList.add('open');
         lightbox.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+        syncBodyOverflow();
     }
 
     function closeLightbox() {
         if (!lightbox) return;
         lightbox.classList.remove('open');
         lightbox.setAttribute('aria-hidden', 'true');
-        if (!modal || !modal.classList.contains('open')) {
-            document.body.style.overflow = '';
-        }
+        syncBodyOverflow();
     }
 
     document.addEventListener('click', (e) => {
+        // Referencias cruzadas al Diario del Cazador desde Jefes, Personajes o Mapa
+        const bestiaryRefBtn = e.target.closest('.open-bestiary-ref');
+        if (bestiaryRefBtn) {
+            e.stopPropagation();
+            if (characterModal && characterModal.classList.contains('open')) closeCharacterModal();
+            openBestiaryModal(bestiaryRefBtn.dataset.bestiaryId);
+            return;
+        }
+
+        // Enlace desde Guía de Mecánicas hacia pestañas del Arsenal
+        const mecRef = e.target.closest('.mec-ref-btn');
+        if (mecRef) {
+            const tab = mecRef.dataset.arsenalTab;
+            arsenalTabs.forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+            renderArsenal(tab);
+            document.getElementById('arsenal')?.scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+
         // Toggle de spoilers
         const spBtn = e.target.closest('.spoiler-toggle');
         if (spBtn) {
@@ -1531,6 +2400,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             if (lightbox && lightbox.classList.contains('open')) {
                 closeLightbox();
+            } else if (bestiaryModal && bestiaryModal.classList.contains('open')) {
+                closeBestiaryModal();
+            } else if (characterModal && characterModal.classList.contains('open')) {
+                closeCharacterModal();
             } else if (modal && modal.classList.contains('open')) {
                 closeModal();
             } else if (searchResultsBox) {
@@ -1540,44 +2413,97 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================================
-    // 9. BUSCADOR GENERAL DEL ARCHIVO
+    // 9. BUSCADOR GENERAL AMPLIADO DEL ARCHIVO (SIN DUPLICADOS)
     // =========================================================================
     const globalSearchInput = document.getElementById('global-search');
     const searchResultsBox = document.getElementById('search-results');
 
     function buildSearchIndex() {
         const index = [];
-        charactersData.forEach(c => index.push({
-            title: c.name, type: 'Personaje', snippet: c.desc, section: '#historia', targetId: `char-${c.id}`
+        const seenKeys = new Set();
+        const pushUnique = (key, entry) => {
+            const k = key.toLowerCase();
+            if (seenKeys.has(k)) return;
+            seenKeys.add(k);
+            index.push(entry);
+        };
+
+        // 11 Personajes principales
+        charactersData.forEach(c => pushUnique(`char:${c.id}`, {
+            title: c.name, type: 'Personaje Clave', snippet: c.desc, section: '#historia', targetId: `char-${c.id}`
         }));
-        expansionsData.forEach(e => index.push({
+        // 43 Personajes ampliados
+        extChars.forEach(c => pushUnique(`npc:${c.id}`, {
+            title: c.name, type: c.categoryLabel, snippet: `${c.location} — ${c.history}`, section: '#enciclopedia-personajes', npcItem: c
+        }));
+        // 168 Entradas del Diario del Cazador (incluye referencias cruzadas a jefes sin duplicar)
+        const linkedBossNames = new Set();
+        bestiaryList.forEach(b => {
+            if (b.bossRef) linkedBossNames.add(b.bossRef);
+            pushUnique(`bestiary:${b.id}`, {
+                title: `${b.nameEs} (${b.nameEn})`,
+                type: b.isSpecialRecord ? 'Registro Especial · Diario' : `Diario del Cazador #${String(b.order).padStart(3, '0')}`,
+                snippet: `${b.region} — ${b.description}`,
+                section: '#bestiario',
+                bestiaryId: b.id
+            });
+        });
+        // Jefes exclusivos de #jefes que no tienen slot propio separado (ej. Campeón Fallido, Tirano de Almas, Familiar Perdido, Hermanas de Batalla, Resplandor Absoluto)
+        bossesEnemiesData.forEach(b => {
+            if (!linkedBossNames.has(b.name)) {
+                pushUnique(`boss:${b.name}`, {
+                    title: b.name, type: b.categoryLabel, snippet: `${b.location} — ${b.desc}`, section: '#jefes', bossCat: b.category
+                });
+            }
+        });
+        expansionsData.forEach(e => pushUnique(`dlc:${e.id}`, {
             title: e.name, type: 'Expansión Gratuita', snippet: e.desc, section: '#expansiones', targetId: `dlc-${e.id}`
         }));
-        artArchiveData.forEach(b => index.push({
+        artArchiveData.forEach(b => pushUnique(`biome:${b.id}`, {
             title: b.title, type: 'Bioma / Arte', snippet: b.summary, section: '#arte', biomeItem: b
         }));
-        bossesEnemiesData.forEach(b => index.push({
-            title: b.name, type: b.categoryLabel, snippet: `${b.location} — ${b.desc}`, section: '#jefes', bossCat: b.category
-        }));
-        charmsData.forEach(c => index.push({
+        charmsData.forEach(c => pushUnique(`charm:${c.en}`, {
             title: `${c.esp} (${c.en})`, type: `Amuleto · ${c.notch} muescas`, snippet: c.effect, section: '#arsenal', arsenalTab: 'amuletos', charmQuery: c.esp
         }));
-        abilitiesData.forEach(a => index.push({
+        abilitiesData.forEach(a => pushUnique(`ability:${a.name}`, {
             title: a.name, type: 'Habilidad', snippet: a.desc, section: '#arsenal', arsenalTab: 'habilidades'
         }));
-        spellsUpgradesData.forEach(s => index.push({
+        spellsUpgradesData.forEach(s => pushUnique(`spell:${s.name}`, {
             title: s.name, type: 'Hechizo / Mejora', snippet: s.desc, section: '#arsenal', arsenalTab: 'hechizos'
         }));
-        itemsData.forEach(i => index.push({
+        itemsData.forEach(i => pushUnique(`item:${i.name}`, {
             title: i.name, type: 'Objeto Clave', snippet: i.desc, section: '#arsenal', arsenalTab: 'objetos'
         }));
-        mapRegionsData.forEach(m => index.push({
-            title: m.name, type: 'Cartografía', snippet: m.pois, section: '#mapa'
+        collectiblesList.forEach(c => pushUnique(`col:${c.id}`, {
+            title: c.name, type: 'Coleccionable / Misión', snippet: `${c.region} — ${c.description}`, section: '#coleccionables', targetId: c.id
         }));
-        index.push({
+        civsList.forEach(c => pushUnique(`civ:${c.id}`, {
+            title: c.name, type: 'Civilización / Tribu', snippet: c.origin, section: '#civilizaciones', targetId: c.id
+        }));
+        mechanicsList.forEach(m => pushUnique(`mec:${m.id}`, {
+            title: m.title, type: 'Mecánica de Juego', snippet: m.summary, section: '#mecanicas', targetId: m.id
+        }));
+        achievementsList.forEach(a => pushUnique(`ach:${a.id}`, {
+            title: `${a.name} (${a.en})`, type: `Logro · ${a.catLabel}`, snippet: a.desc, section: '#logros', targetId: `ach-${a.id}`, achCat: 'all'
+        }));
+        timelineList.forEach((t, i) => pushUnique(`era:${i}`, {
+            title: t.title, type: `Cronología · ${t.era}`, snippet: t.summary, section: '#cronologia', targetId: `era-${i}`
+        }));
+        secretsList.forEach(s => pushUnique(`sec:${s.id}`, {
+            title: s.title, type: 'Secreto / Curiosidad', snippet: s.desc, section: '#secretos', targetId: s.id
+        }));
+        if (encyclopediaData.endingsAndLore) {
+            encyclopediaData.endingsAndLore.endings.forEach(e => pushUnique(`end:${e.id}`, {
+                title: e.title, type: 'Final (⚠ Spoiler)', snippet: 'Requiere desbloquear la advertencia de spoilers en la sección Finales y Lore.', section: '#finales'
+            }));
+        }
+        activeMapRegions.forEach((m, idx) => pushUnique(`map:${m.id}`, {
+            title: m.name, type: 'Cartografía', snippet: m.pois, section: '#mapa', mapIdx: idx
+        }));
+        pushUnique('music:larkin', {
             title: 'Christopher Larkin & Banda Sonora', type: 'Música', snippet: 'Compositor de Hollow Knight, Gods & Nightmares y Silksong.', section: '#musica'
         });
-        index.push({
+        pushUnique('silksong:main', {
             title: 'Hollow Knight: Silksong & Pharloom', type: 'Universo / Secuela', snippet: 'Hornet, nuevo reino de Pharloom, herramientas y seda.', section: '#silksong'
         });
         return index;
@@ -1598,12 +2524,12 @@ document.addEventListener('DOMContentLoaded', () => {
             entry.title.toLowerCase().includes(q) ||
             entry.type.toLowerCase().includes(q) ||
             entry.snippet.toLowerCase().includes(q)
-        ).slice(0, 10);
+        ).slice(0, 12);
 
         searchResultsBox.hidden = false;
 
         if (!matches.length) {
-            searchResultsBox.innerHTML = `<div class="search-empty">Sin coincidencias para "<strong>${escapeAttr(query)}</strong>". Prueba con Hornet, Grimm, Abismo, Brújula o Silksong.</div>`;
+            searchResultsBox.innerHTML = `<div class="search-empty">Sin coincidencias para "<strong>${escapeAttr(query)}</strong>". Prueba con Hornet, Áspid, Mantis, Canales Reales, Flor Delicada o Silksong.</div>`;
             return;
         }
 
@@ -1623,9 +2549,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchResultsBox.hidden = true;
                 if (globalSearchInput) globalSearchInput.value = '';
 
+                if (item.bestiaryId) {
+                    document.querySelector('#bestiario')?.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => openBestiaryModal(item.bestiaryId), 260);
+                    return;
+                }
+                if (item.npcItem) {
+                    document.querySelector('#enciclopedia-personajes')?.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => openCharacterModal(item.npcItem), 260);
+                    return;
+                }
                 if (item.biomeItem) {
                     document.querySelector('#arte')?.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => openModal(item.biomeItem), 300);
+                    setTimeout(() => openModal(item.biomeItem), 280);
+                    return;
+                }
+                if (typeof item.mapIdx === 'number') {
+                    selectMapRegionByIndex(item.mapIdx);
+                    document.querySelector('#mapa')?.scrollIntoView({ behavior: 'smooth' });
                     return;
                 }
                 if (item.bossCat) {
@@ -1636,6 +2577,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     arsenalTabs.forEach(b => b.classList.toggle('active', b.dataset.tab === item.arsenalTab));
                     if (item.charmQuery && charmLocalSearch) charmLocalSearch.value = item.charmQuery;
                     renderArsenal(item.arsenalTab);
+                }
+                if (item.achCat) {
+                    achFilterBtns.forEach(b => b.classList.toggle('active', b.dataset.achCat === 'all'));
+                    renderAchievements('all');
                 }
                 const targetEl = item.targetId ? document.getElementById(item.targetId) : document.querySelector(item.section);
                 if (targetEl) {
@@ -1660,10 +2605,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // INICIALIZACIÓN DE RENDERIZADO
     // =========================================================================
     renderCharacters();
+    renderExtendedCharacters();
     renderExpansions();
     renderArtCards('all');
     renderBosses('all');
+    initBestiary();
     renderArsenal('amuletos');
+    renderCollectibles('all');
+    renderCivilizations();
+    renderMechanics('all');
+    initEndingsAndLore();
+    initAchievements();
+    renderChronology();
+    renderSecrets('all');
     renderMapRegions();
     renderMusic();
 
@@ -1761,30 +2715,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.y += p.speedY;
-                p.x += p.speedX;
+            if (!document.hidden) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.x += p.speedX;
 
-                if (p.y < -10) {
-                    p.y = canvas.height + 10;
-                    p.x = Math.random() * canvas.width;
-                }
+                    if (p.y < -10) {
+                        p.y = canvas.height + 10;
+                        p.x = Math.random() * canvas.width;
+                    }
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = p.isInfection
-                    ? `rgba(255, 107, 43, ${p.alpha})`
-                    : `rgba(124, 232, 255, ${p.alpha})`;
-                ctx.fill();
-            });
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.isInfection
+                        ? `rgba(255, 107, 43, ${p.alpha})`
+                        : `rgba(124, 232, 255, ${p.alpha})`;
+                    ctx.fill();
+                });
+            }
             requestAnimationFrame(animateParticles);
         }
 
+        let resizeTimer;
         window.addEventListener('resize', () => {
-            resizeCanvas();
-            initParticles();
-            showVisibleElements();
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                resizeCanvas();
+                initParticles();
+                showVisibleElements();
+            }, 150);
         });
 
         resizeCanvas();
